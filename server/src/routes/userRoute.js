@@ -95,4 +95,6 @@ router.put(
   userControllers.updatePassword
 );
 
+
+
 export default router;

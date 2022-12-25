@@ -2,11 +2,13 @@ import jsonwebtoken from 'jsonwebtoken';
 import responseHandler from '../handlers/responseHandler';
 import userModel from '../models/userModel';
 
+//decode the JWT from the request.
 const tokenDecode = (req) => {
   try {
     const bearer = req.headers['authorization'];
     if (bearer) {
       const token = bearer.split(' ')[1];
+      // If the JWT is successfully verified, returns the decoded token payload
       const decoded = jsonwebtoken.verify(token, process.env.JWT_TOKEN_SECRET);
       return decoded;
     }
