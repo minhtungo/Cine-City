@@ -1,18 +1,23 @@
 import { ThemeProvider } from '@mui/material/styles';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ToastContainer from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import CssBaseline from '@mui/material/CssBaseline';
 import themeConfigs from './configs/themeConfigs';
+import routes from './routes/routes';
+import Wrapper from './components/common/Wrapper';
 
 const App = () => {
   const { themeMode } = useSelector((state) => state.themeMode);
 
   return (
     <ThemeProvider theme={themeConfigs.custom({ mode: themeMode })}>
-      //reset and normalize the styles of the document. ensure consistent across different browsers and devices avoid conflicts with the default styles of the browser.
+      //reset and normalize the styles of the document. ensure consistent across
+      different browsers and devices avoid conflicts with the default styles of
+      the browser.
       <CssBaseline />
       <ToastContainer
-        position='bottem-right'
+        position='bottom-right'
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -21,6 +26,39 @@ const App = () => {
         pauseOnHover
         theme={themeMode}
       />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<MainLayout />}>
+            {routes.map((route, index) =>
+              route.index ? (
+                <Route
+                  index
+                  key={index}
+                  element={
+                    route.state ? (
+                      <Wrapper state={route.state}>{route.element}</Wrapper>
+                    ) : (
+                      route.element
+                    )
+                  }
+                />
+              ) : (
+                <Route
+                  path={route.path}
+                  key={index}
+                  element={
+                    route.state ? (
+                      <Wrapper state={route.state}>{route.element}</Wrapper>
+                    ) : (
+                      route.element
+                    )
+                  }
+                />
+              )
+            )}
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 };

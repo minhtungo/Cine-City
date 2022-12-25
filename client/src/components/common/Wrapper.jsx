@@ -1,19 +1,16 @@
 import { useEffect } from 'react';
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setAppState } from '../../redux/features/appStateSlice';
 
-const Wrapper = ({state,children}) => {
-    const dispatch = useDispatch();
-    useEffect(() => {
-      dispatch()
-    
-      return () => {
-        second
-      }
-    }, [third])
-    
+const Wrapper = ({ state, children }) => {
+  const dispatch = useDispatch();
 
-  return (
-    <div>Wrapper</div>
-  )
-}
-export default Wrapper
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    dispatch(setAppState(state));
+  }, [state, dispatch]);
+
+  return children;
+};
+
+export default Wrapper;
