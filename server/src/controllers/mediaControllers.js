@@ -1,6 +1,6 @@
 import responseHandler from '../handlers/responseHandler.js';
 import tmdbApi from './../tmdb/tmdbApi.js';
-import tokenMiddleware from '../middleware/tokenMiddleware.js';
+import tokenMiddleware from '../middlewares/tokenMiddleware.js';
 import userModel from '../models/User.js';
 import favoriteModel from './../models/Favorite.js';
 import reviewModel from '../models/Review.js';

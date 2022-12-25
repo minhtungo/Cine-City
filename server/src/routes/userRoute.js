@@ -3,7 +3,7 @@ import { body } from 'express-validator';
 // import favoriteControllers from '../controllers/favoriteControllers.js';
 import userControllers from '../controllers/userController.js';
 import requestHandler from '../handlers/requestHandler.js';
-import tokenMiddleware from '../middleware/tokenMiddleware.js';
+import tokenMiddleware from '../middlewares/tokenMiddleware.js';
 
 const router = express.Router();
 

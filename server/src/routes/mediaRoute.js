@@ -1,5 +1,5 @@
 import express from 'express';
-import mediaControllers from '../controllers/mediaControllers';
+import mediaControllers from '../controllers/mediaControllers.js';
 
 const router = express.Router({ mergeParams: true });
 
