@@ -3,7 +3,7 @@ import { body } from 'express-validator';
 // import favoriteControllers from '../controllers/favoriteControllers.js';
 import userControllers from '../controllers/userController.js';
 import requestHandler from '../handlers/requestHandler.js';
-// import tokenMiddleware from '../middleware/tokenMiddleware.js';
+import tokenMiddleware from '../middleware/tokenMiddleware.js';
 
 const router = express.Router();
 
@@ -69,7 +69,7 @@ router.post(
 
 router.put(
   'update-password',
-//   tokenMiddleware.auth,
+  tokenMiddleware.auth,
   body('currentPassword')
     .exists()
     .withMessage('Current password is required')
@@ -94,35 +94,5 @@ router.put(
   requestHandler.validate,
   userControllers.updatePassword
 );
-
-// router.get('/info', tokenMiddleware.auth, userControllers.getUserInfo);
-
-// router.get('/favorites', tokenMiddleware.auth, userControllers.getFavorites);
-
-// router.post(
-//   '/favorites',
-//   tokenMiddleware.auth,
-//   body('mediaType')
-//     .exists()
-//     .custom((type) =>
-//       ['movie', 'tv'].includes(type).withMessage('Invalid media type')
-//     ),
-//   body('mediaId')
-//     .exists()
-//     .withMessage('Media ID is required')
-//     .isLength({ min: 1 })
-//     .withMessage('Media ID can not be empty'),
-//   body('mediaTitle').exists().withMessage('Media title is required'),
-//   body('mediaPoster').exists().withMessage('Media poster is required'),
-//   body('mediaRate').exists().withMessage('Media rate is required'),
-//   requestHandler.validate,
-//   favoriteController.addFavorite
-// );
-
-// router.delete(
-//   '/favorites/:favoriteId',
-//   tokenMiddleware.auth,
-//   favoriteController.removeFavorite
-// );
 
 export default router;

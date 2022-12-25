@@ -17,7 +17,7 @@ const signup = async (req, res) => {
     newUser.username = username;
     newUser.displayName = displayName;
     newUser.setPassword(password);
-
+o
     await user.save();
 
     const token = jsonwebtoken.sign(
