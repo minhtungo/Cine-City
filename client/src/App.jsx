@@ -6,15 +6,16 @@ import CssBaseline from '@mui/material/CssBaseline';
 import themeConfigs from './configs/themeConfigs';
 import routes from './routes/routes';
 import Wrapper from './components/common/Wrapper';
+import MainLayout from './components/layout/MainLayout';
 
 const App = () => {
   const { themeMode } = useSelector((state) => state.themeMode);
 
   return (
     <ThemeProvider theme={themeConfigs.custom({ mode: themeMode })}>
-      //reset and normalize the styles of the document. ensure consistent across
+      {/* reset and normalize the styles of the document. ensure consistent across
       different browsers and devices avoid conflicts with the default styles of
-      the browser.
+      the browser. */}
       <CssBaseline />
       <ToastContainer
         position='bottom-right'

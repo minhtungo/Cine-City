@@ -2,12 +2,12 @@ import { createTheme } from '@mui/material/styles';
 import { colors } from '@mui/material';
 
 export const themeModes = {
-  light: 'light',
   dark: 'dark',
+  light: 'light',
 };
 
 const themeConfigs = {
-  custom: (mode) => {
+  custom: ({ mode }) => {
     const customPalette =
       mode === themeModes.dark
         ? {
@@ -16,7 +16,7 @@ const themeConfigs = {
               contrastText: '#ffffff',
             },
             secondary: {
-              main: 'f44336',
+              main: '#f44336',
               contrastText: '#ffffff',
             },
             background: {
@@ -29,7 +29,7 @@ const themeConfigs = {
               main: '#ff0000',
             },
             secondary: {
-              main: 'f44336',
+              main: '#f44336',
             },
             background: {
               default: colors.grey['100'],
@@ -37,7 +37,10 @@ const themeConfigs = {
           };
 
     return createTheme({
-      palette: { mode, ...customPalette },
+      palette: {
+        mode,
+        ...customPalette,
+      },
       components: {
         MuiButton: {
           defaultProps: { disableElevation: true },
