@@ -49,11 +49,45 @@ const searchMedia = async (req, res) => {
   }
 };
 
+const getMediaDetail = async (req, res) => {
+  try {
+    const { mediaType, mediaId } = req.params;
 
+    const media = await tmdbApi.mediaDetail({ mediaType, mediaId });
+
+    media.credits = await tmdbApi.mediaCredits({ mediaType, mediaId });
+    media.videos = await tmdbApi.mediaVideos({ mediaType, mediaId });
+    media.recommendations = await tmdbApi.mediaRecommend({
+      mediaType,
+      mediaId,
+    });
+    media.images = await tmdbApi.mediaImages({ mediaType, mediaId });
+
+    const tokenDecoded = tokenMiddleware.tokenDecode(req);
+
+    if (tokenDecoded) {
+      const user = await userModel.findById(tokenDecoded.data);
+
+      if (user) {
+        const isFavorite = favoriteModel.findOne({ user: user.id, mediaId });
+        media.isFavorite = isFavorite !== null;
+      }
+    }
+
+    media.reviews = await reviewModel
+      .find({ mediaId })
+      .populate('user')
+      .sort('-createdAt');
+
+    responseHandler.successResponse(res, media);
+  } catch {
+    responseHandler.error(res);
+  }
+};
 
 export default {
   getMediaList,
   getMediaGenres,
   searchMedia,
-
+  getMediaDetail,
 };
