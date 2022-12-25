@@ -3,14 +3,14 @@ import queryString from 'query-string';
 
 const baseURL = 'http://127.0.0.1:5000/api/v1/';
 
-const privateClient = axios.create({
+const userClient = axios.create({
   baseURL,
   paramsSerializer: {
     encode: (params) => queryString.stringify(params),
   },
 });
 
-privateClient.interceptors.request.use(async (config) => {
+userClient.interceptors.request.use(async (config) => {
   return {
     ...config,
     headers: {
@@ -20,7 +20,7 @@ privateClient.interceptors.request.use(async (config) => {
   };
 });
 
-privateClient.interceptors.response.use(
+userClient.interceptors.response.use(
   (response) => {
     if (response && response.data) {
       return response.data;
@@ -32,4 +32,4 @@ privateClient.interceptors.response.use(
   }
 );
 
-export default privateClient;
+export default userClient;

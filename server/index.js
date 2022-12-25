@@ -1,8 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import 'dotenv/config';
 import cookieParser from 'cookie-parser';
+import 'dotenv/config';
+import routes from './src/routes/index.js';
 
 const app = express();
 
@@ -11,9 +12,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use('/api/v1', routes);
+
 const port = process.env.PORT || 5000;
 
-app.get('/', (req, res) => {});
 
 mongoose
   .connect(process.env.MONGODB_URL)
@@ -25,5 +27,5 @@ mongoose
   })
   .catch((error) => {
     console.log(error);
-    res.status(500).send({ error: 'Error connecting to the database' });
+    // res.status(500).send({ error: 'Error connecting to the database' });
   });
