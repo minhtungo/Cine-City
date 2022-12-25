@@ -18,32 +18,30 @@ import Logo from './Logo';
 import menuConfigs from '../../configs/menuConfigs';
 import { Link } from 'react-router-dom';
 
-const ScrollAppBar =
-  () =>
-  ({ children, window }) => {
-    const { themeMode } = useSelector((state) => state.themeMode);
+const ScrollAppBar = ({ children, window }) => {
+  const { themeMode } = useSelector((state) => state.themeMode);
 
-    const trigger = useScrollTrigger({
-      disableHysteresis: true,
-      threshold: 50,
-      target: window ? window() : undefined,
-    });
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 50,
+    target: window ? window() : undefined,
+  });
 
-    return cloneElement(children, {
-      sx: {
-        color: trigger
-          ? 'text.primary'
-          : themeMode === themeModes.dark
-          ? 'primary.contrastText'
-          : 'text.primary',
-        backgroundColor: trigger
-          ? 'background.paper'
-          : themeMode === themeModes.dark
-          ? 'transparent'
-          : 'background.paper',
-      },
-    });
-  };
+  return cloneElement(children, {
+    sx: {
+      color: trigger
+        ? 'text.primary'
+        : themeMode === themeModes.dark
+        ? 'primary.contrastText'
+        : 'text.primary',
+      backgroundColor: trigger
+        ? 'background.paper'
+        : themeMode === themeModes.dark
+        ? 'transparent'
+        : 'background.paper',
+    },
+  });
+};
 
 const Header = () => {
   const { user } = useSelector((state) => state.user);
@@ -56,7 +54,7 @@ const Header = () => {
 
   const onSwitchThemeMode = () => {
     const theme =
-      themeMode === themeModes.dark ? themeMode.light : themeMode.dark;
+      themeMode === themeModes.dark ? themeModes.light : themeModes.dark;
     dispatch(setThemeMode(theme));
   };
 
