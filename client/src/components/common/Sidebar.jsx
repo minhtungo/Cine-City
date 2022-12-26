@@ -8,21 +8,20 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import useSwitchTheme from '../../hooks/useSwitchTheme';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 
 import uiConfigs from './../../configs/uiConfigs';
 import { themeModes } from '../../configs/themeConfigs';
-import onSwitchThemeMode from '../../utils/switchThemeUtils';
 import Logo from './Logo';
 import menuConfigs from './../../configs/menuConfigs';
 
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-
 const Sidebar = ({ isOpened, toggleSidebar }) => {
-  const dispatch = useDispatch();
+  const switchTheme = useSwitchTheme();
+
   const { user } = useSelector((state) => state.user);
   const { themeMode } = useSelector((state) => state.themeMode);
   const { appState } = useSelector((state) => state.appState);
@@ -42,7 +41,7 @@ const Sidebar = ({ isOpened, toggleSidebar }) => {
         </Typography>
         {menuConfigs.main.map((item, index) => (
           <ListItemButton
-            key={index}
+            key={index * Math.random() * Math.random()}
             sx={{
               borderRadius: '10px',
               marginY: 1,
@@ -73,7 +72,7 @@ const Sidebar = ({ isOpened, toggleSidebar }) => {
             </Typography>
             {menuConfigs.user.map((item, index) => (
               <ListItemButton
-                key={index}
+                key={index * Math.random() * Math.random()}
                 sx={{
                   borderRadius: '10px',
                   marginY: 1,
@@ -101,7 +100,7 @@ const Sidebar = ({ isOpened, toggleSidebar }) => {
         <Typography variant='h6' marginBottom='20px'>
           Theme
         </Typography>
-        <ListItemButton onClick={onSwitchThemeMode}>
+        <ListItemButton onClick={switchTheme}>
           <ListItemIcon>
             {themeMode === themeModes.dark ? (
               <DarkModeOutlinedIcon />

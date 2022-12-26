@@ -13,13 +13,12 @@ import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import { cloneElement, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { themeModes } from '../../configs/themeConfigs';
-import onSwitchThemeMode from '../../utils/switchThemeUtils';
-import { setThemeMode } from '../../redux/features/themeModeSlice';
 import Logo from './Logo';
 import menuConfigs from '../../configs/menuConfigs';
 import { Link } from 'react-router-dom';
 import UserMenu from './UserMenu';
 import Sidebar from './Sidebar';
+import useSwitchTheme from '../../hooks/useSwitchTheme';
 
 const ScrollAppBar = ({ children, window }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
@@ -55,6 +54,8 @@ const Header = () => {
 
   const dispatch = useDispatch();
 
+  const switchTheme = useSwitchTheme();
+
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
@@ -88,7 +89,7 @@ const Header = () => {
               </Box>
               {menuConfigs.main.map((menu, index) => (
                 <Button
-                  key={index}
+                  key={index * Math.random() * Math.random()}
                   sx={{
                     color: appState.includes(menu.state)
                       ? 'primary.contrastText'
@@ -102,7 +103,7 @@ const Header = () => {
                   {menu.label}
                 </Button>
               ))}
-              <IconButton sx={{ color: 'inherit' }} onClick={onSwitchThemeMode}>
+              <IconButton sx={{ color: 'inherit' }} onClick={switchTheme}>
                 {themeMode === themeModes.dark ? (
                   <DarkModeOutlinedIcon />
                 ) : (

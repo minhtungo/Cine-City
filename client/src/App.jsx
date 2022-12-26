@@ -34,12 +34,10 @@ const App = () => {
               route.index ? (
                 <Route
                   index
-                  key={index}
+                  key={index * Math.random() * Math.random()}
                   element={
                     route.state ? (
-                      <Wrapper state={route.state}>
-                        {route.element}
-                      </Wrapper>
+                      <Wrapper state={route.state}>{route.element}</Wrapper>
                     ) : (
                       route.element
                     )
@@ -48,12 +46,10 @@ const App = () => {
               ) : (
                 <Route
                   path={route.path}
-                  key={index}
+                  key={index * Math.random() * Math.random()}
                   element={
                     route.state ? (
-                      <Wrapper state={route.state}>
-                        {route.element}
-                      </Wrapper>
+                      <Wrapper state={route.state}>{route.element}</Wrapper>
                     ) : (
                       route.element
                     )
