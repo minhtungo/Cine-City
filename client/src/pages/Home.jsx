@@ -1,6 +1,14 @@
+import Hero from './../components/Hero';
+import tmdbConfigs from './../configs/tmdbConfigs';
+
 const Home = () => {
   return (
-    <div></div>
-  )
-}
-export default Home
+    <>
+      <Hero
+        mediaType={tmdbConfigs.mediaType.movie}
+        mediaCategory={tmdbConfigs.mediaCategory.popular}
+      />
+    </>
+  );
+};
+export default Home;

@@ -17,6 +17,8 @@ const userApi = {
         username,
         password,
       });
+      console.log(response);
+      console.log({ response });
       return { response };
     } catch (error) {
       return { error };

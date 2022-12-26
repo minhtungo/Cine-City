@@ -9,10 +9,10 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       if (action.payload === null) {
-        localStorage.removeItem('actkn');
+        localStorage.removeItem('token');
       } else {
         if (action.payload.token)
-          localStorage.setItem('actkn', action.payload.token);
+          localStorage.setItem('token', action.payload.token);
       }
 
       state.user = action.payload;
