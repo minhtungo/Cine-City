@@ -31,7 +31,7 @@ const SignIn = ({ switchAuthState }) => {
     onSubmit: async (values) => {
       setErrorMessage(null);
       setIsLoginRequest(true);
-      const { response, err } = await userApi.login(values);
+      const { response, error } = await userApi.login(values);
       setIsLoginRequest(false);
       if (response) {
         signInForm.resetForm();
@@ -40,8 +40,8 @@ const SignIn = ({ switchAuthState }) => {
         toast.success('Login successfully');
       }
       console.log(response);
-      console.log(err);
-      if (err) setErrorMessage(err.message);
+      console.log(error);
+      if (error) setErrorMessage(error.message);
     },
   });
 

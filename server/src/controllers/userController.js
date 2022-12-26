@@ -68,7 +68,7 @@ const login = async (req, res) => {
       id: user.id,
     });
   } catch (error) {
-    responseHandler.error(res);
+    responseHandler.errorResponse(res);
   }
 };
 
@@ -92,7 +92,7 @@ const updatePassword = async (req, res) => {
       message: 'Password updated successfully',
     });
   } catch (error) {
-    responseHandler.error(res);
+    responseHandler.errorResponse(res);
   }
 };
 
@@ -104,7 +104,7 @@ const getUserInfo = async (req, res) => {
 
     responseHandler.successResponse(res, user);
   } catch (error) {
-    responseHandler.error(res);
+    responseHandler.errorResponse(res);
   }
 };
 

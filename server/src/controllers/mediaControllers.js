@@ -18,7 +18,7 @@ const getMediaList = async (req, res) => {
 
     return responseHandler.successResponse(res, response);
   } catch {
-    responseHandler.error(res);
+    responseHandler.errorResponse(res);
   }
 };
 
@@ -30,7 +30,7 @@ const getMediaGenres = async (req, res) => {
 
     return responseHandler.successResponse(res, response);
   } catch {
-    responseHandler.error(res);
+    responseHandler.errorResponse(res);
   }
 };
 
@@ -45,7 +45,7 @@ const searchMedia = async (req, res) => {
 
     responseHandler.successResponse(res, response);
   } catch {
-    responseHandler.error(res);
+    responseHandler.errorResponse(res);
   }
 };
 
@@ -81,7 +81,7 @@ const getMediaDetail = async (req, res) => {
 
     responseHandler.successResponse(res, media);
   } catch {
-    responseHandler.error(res);
+    responseHandler.errorResponse(res);
   }
 };
 

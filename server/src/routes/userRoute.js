@@ -56,13 +56,7 @@ router.post(
     .exists()
     .withMessage('Password is required')
     .isLength({ min: 5 })
-    .withMessage('Password must be at least 5 characters long')
-    .custom((value, { req }) => {
-      if (value !== req.body.password) {
-        throw new Error('Passwords must match');
-      }
-      return true;
-    }),
+    .withMessage('Password must be at least 5 characters long'),
   requestHandler.validate,
   userControllers.login
 );
