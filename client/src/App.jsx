@@ -37,7 +37,9 @@ const App = () => {
                   key={index}
                   element={
                     route.state ? (
-                      <Wrapper state={route.state}>{route.element}</Wrapper>
+                      <Wrapper state={route.state}>
+                        {route.element}
+                      </Wrapper>
                     ) : (
                       route.element
                     )
@@ -49,7 +51,9 @@ const App = () => {
                   key={index}
                   element={
                     route.state ? (
-                      <Wrapper state={route.state}>{route.element}</Wrapper>
+                      <Wrapper state={route.state}>
+                        {route.element}
+                      </Wrapper>
                     ) : (
                       route.element
                     )

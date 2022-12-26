@@ -13,10 +13,13 @@ import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import { cloneElement, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { themeModes } from '../../configs/themeConfigs';
+import onSwitchThemeMode from '../../utils/switchThemeUtils';
 import { setThemeMode } from '../../redux/features/themeModeSlice';
 import Logo from './Logo';
 import menuConfigs from '../../configs/menuConfigs';
 import { Link } from 'react-router-dom';
+import UserMenu from './UserMenu';
+import Sidebar from './Sidebar';
 
 const ScrollAppBar = ({ children, window }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
@@ -52,14 +55,11 @@ const Header = () => {
 
   const dispatch = useDispatch();
 
-  const onSwitchThemeMode = () => {
-    const theme =
-      themeMode === themeModes.dark ? themeModes.light : themeModes.dark;
-    dispatch(setThemeMode(theme));
-  };
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
     <>
+      <Sidebar isOpened={sidebarOpen} toggleSidebar={toggleSidebar} />
       <ScrollAppBar>
         <AppBar elevation={0} sx={{ zIndex: 9999 }}>
           <Toolbar
@@ -69,6 +69,7 @@ const Header = () => {
               <IconButton
                 color='inherit'
                 sx={{ mr: 2, display: { md: 'none' } }}
+                onClick={toggleSidebar}
               >
                 <MenuIcon />
               </IconButton>
@@ -109,6 +110,18 @@ const Header = () => {
                 )}
               </IconButton>
             </Box>
+            {/* user menu */}
+            <Stack spacing={3} direction='row' alignItems='center'>
+              {!user && (
+                <Button
+                  variant='contained'
+                  onClick={() => dispatch(setAuthModalOpen(true))}
+                >
+                  Login
+                </Button>
+              )}
+            </Stack>
+            {user && <UserMenu />}
           </Toolbar>
         </AppBar>
       </ScrollAppBar>

@@ -10,19 +10,19 @@ const main = [
   {
     label: 'movies',
     path: '/movie',
-    // icon: <SlideshowOutlinedIcon />,
+    icon: <SlideshowOutlinedIcon />,
     state: 'movie',
   },
   {
     label: 'tv series',
     path: '/tv',
-    // icon: <LiveTvOutlinedIcon />,
+    icon: <LiveTvOutlinedIcon />,
     state: 'tv',
   },
   {
     label: 'search',
     path: '/search',
-    // icon: <SearchOutlinedIcon />,
+    icon: <SearchOutlinedIcon />,
     state: 'search',
   },
 ];
@@ -31,19 +31,19 @@ const user = [
   {
     label: 'favorites',
     path: '/favorites',
-    // icon: <FavoriteBorderOutlinedIcon />,
+    icon: <FavoriteBorderOutlinedIcon />,
     state: 'favorite',
   },
   {
     label: 'reviews',
     path: '/reviews',
-    // icon: <RateReviewOutlinedIcon />,
+    icon: <RateReviewOutlinedIcon />,
     state: 'reviews',
   },
   {
     label: 'update password',
     path: '/update-password',
-    // icon: <LockResetOutlinedIcon />,
+    icon: <LockResetOutlinedIcon />,
     state: 'passwordUpdate',
   },
 ];
