@@ -8,6 +8,8 @@ import routes from './routes/routes';
 import Wrapper from './components/common/Wrapper';
 import MainLayout from './components/layout/MainLayout';
 
+import 'react-toastify/dist/ReactToastify.css';
+
 const App = () => {
   const { themeMode } = useSelector((state) => state.themeMode);
 

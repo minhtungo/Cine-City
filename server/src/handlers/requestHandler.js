@@ -7,8 +7,10 @@ const validate = (req, res, next) => {
 
   //check whether the errors list is empty or not
   if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array()[0].msg });
+    return res.status(400).json({ errors: errors.array()[0].msg });
   }
+
+  next();
 };
 
 export default { validate };

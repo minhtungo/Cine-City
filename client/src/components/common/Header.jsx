@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom';
 import UserMenu from './UserMenu';
 import Sidebar from './Sidebar';
 import useSwitchTheme from '../../hooks/useSwitchTheme';
+import { setAuthModalOpen } from '../../redux/features/authModalSlice';
 
 const ScrollAppBar = ({ children, window }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
