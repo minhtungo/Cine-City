@@ -18,8 +18,10 @@ import { toast } from 'react-toastify';
 import genreApi from '../api/modules/genreApi';
 import mediaApi from '../api/modules/mediaApi';
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice';
+import uiConfigs from './../configs/uiConfigs';
+import tmdbConfigs from './../api/configs/tmdbConfigs';
 
-const Hero = () => {
+const Hero = ({ mediaType, mediaCategory }) => {
   const theme = useTheme();
   const dispatch = useDispatch();
 
@@ -54,8 +56,55 @@ const Hero = () => {
     getGenres();
   }, [mediaType, mediaCategory, dispatch]);
 
-  return <Box>
-    
-  </Box>;
+  return (
+    <Box
+      sx={{
+        position: 'relative',
+        color: 'primary.contrastText',
+        '&::before': {
+          content: '""',
+          width: '100%',
+          height: '100%',
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          zIndex: 2,
+          pointerEvent: 'none',
+          ...uiConfigs.style.gradientBgImage[theme.palette.mode],
+        },
+      }}
+    >
+      <Swiper
+        grabCursor
+        loop
+        // modules={[AutoPlay]}
+        style={{ width: '100%', height: 'max-content' }}
+        // autoplay={{
+        //   delay: 2000,
+        //   disableOnInteraction: false,
+        // }}
+      >
+        {movies.map((movie) => (
+          <SwiperSlide key={movie.id}>
+            <Box
+              sx={{
+                paddingTop: {
+                  xs: '130%',
+                  sm: '80%',
+                  md: '60%',
+                  lg: '45%',
+                },
+                backgroundPosition: 'top',
+                backgroundSize: 'cover',
+                backgroundImage: `url(${tmdbConfigs.backdropPath(
+                  movie.backdrop_path || movie.poste_path
+                )})`,
+              }}
+            ></Box>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </Box>
+  );
 };
 export default Hero;

@@ -1,5 +1,5 @@
 import Hero from './../components/Hero';
-import tmdbConfigs from './../configs/tmdbConfigs';
+import tmdbConfigs from '../api/configs/tmdbConfigs';
 
 const Home = () => {
   return (
