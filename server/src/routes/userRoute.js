@@ -1,5 +1,6 @@
 import express from 'express';
 import { body } from 'express-validator';
+import favoriteController from '../controllers/favoriteController.js';
 // import favoriteControllers from '../controllers/favoriteControllers.js';
 import userControllers from '../controllers/userController.js';
 import requestHandler from '../handlers/requestHandler.js';
@@ -90,34 +91,34 @@ router.put(
   userControllers.updatePassword
 );
 
-// router.get('/info', tokenMiddleware.auth, userControllers.getUserInfo);
+router.get('/info', tokenMiddleware.auth, userControllers.getUserInfo);
 
-// router.get('/favorites', tokenMiddleware.auth, userControllers.getFavorites);
+router.get('/favorites', tokenMiddleware.auth, favoriteController.getFavoriteList);
 
-// router.post(
-//   '/favorites',
-//   tokenMiddleware.auth,
-//   body('mediaType')
-//     .exists()
-//     .custom((type) =>
-//       ['movie', 'tv'].includes(type).withMessage('Invalid media type')
-//     ),
-//   body('mediaId')
-//     .exists()
-//     .withMessage('Media ID is required')
-//     .isLength({ min: 1 })
-//     .withMessage('Media ID can not be empty'),
-//   body('mediaTitle').exists().withMessage('Media title is required'),
-//   body('mediaPoster').exists().withMessage('Media poster is required'),
-//   body('mediaRate').exists().withMessage('Media rate is required'),
-//   requestHandler.validate,
-//   favoriteController.addFavorite
-// );
+router.post(
+  '/favorites',
+  tokenMiddleware.auth,
+  body('mediaType')
+    .exists()
+    .custom((type) =>
+      ['movie', 'tv'].includes(type).withMessage('Invalid media type')
+    ),
+  body('mediaId')
+    .exists()
+    .withMessage('Media ID is required')
+    .isLength({ min: 1 })
+    .withMessage('Media ID can not be empty'),
+  body('mediaTitle').exists().withMessage('Media title is required'),
+  body('mediaPoster').exists().withMessage('Media poster is required'),
+  body('mediaRate').exists().withMessage('Media rate is required'),
+  requestHandler.validate,
+  favoriteController.addFavorite
+);
 
-// router.delete(
-//   '/favorites/:favoriteId',
-//   tokenMiddleware.auth,
-//   favoriteController.removeFavorite
-// );
+router.delete(
+  '/favorites/:favoriteId',
+  tokenMiddleware.auth,
+  favoriteController.removeFavorite
+);
 
 export default router;

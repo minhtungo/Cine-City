@@ -4,7 +4,7 @@ import userClient from './../client/userClient';
 const userEndpoints = {
   login: 'user/login',
   signup: 'user/signup',
-  getInfo: 'user/info',
+  getUserInfo: 'user/info',
   updatePassword: 'user/update-password',
   getFavorites: 'user/favorites',
   addFavorite: 'user/favorites',
@@ -35,9 +35,9 @@ const userApi = {
       return { error };
     }
   },
-  getInfo: async () => {
+  getUserInfo: async () => {
     try {
-      const response = await userClient.get(userEndpoints.getInfo);
+      const response = await userClient.get(userEndpoints.getUserInfo);
       return { response };
     } catch (error) {
       return { error };
