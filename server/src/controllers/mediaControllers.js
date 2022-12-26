@@ -16,8 +16,6 @@ const getMediaList = async (req, res) => {
       page,
     });
 
-    console.log(response);
-
     return responseHandler.successResponse(res, response);
   } catch {
     responseHandler.errorResponse(res);

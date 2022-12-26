@@ -33,14 +33,14 @@ const MainLayout = () => {
       if (response) dispatch(setFavoriteList(response));
       if (error) toast.error(error.message);
     };
-    
+
     if (user) getFavorites();
     if (!user) dispatch(setFavoriteList([]));
   }, [user, dispatch]);
 
   return (
     <>
-      <GlobalLoading />
+      {/* <GlobalLoading /> */}
       <AuthModal />
       {/* main */}
       <Box display='flex' minHeight='100vh'>
