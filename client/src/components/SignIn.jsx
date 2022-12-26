@@ -39,8 +39,6 @@ const SignIn = ({ switchAuthState }) => {
         dispatch(setAuthModalOpen(false));
         toast.success('Login successfully');
       }
-      console.log(response);
-      console.log(error);
       if (error) setErrorMessage(error.message);
     },
   });

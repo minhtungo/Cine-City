@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
 );
 
 //set the password for a user
-userSchema.method.setPassword = function (password) {
+userSchema.methods.setPassword = function (password) {
   //generates a random salt
   this.salt = crypto.randomBytes(16).toString('hex');
   //hash the password using the salt.
@@ -38,7 +38,7 @@ userSchema.method.setPassword = function (password) {
 };
 
 // check whether a given password is correct for a user.
-userSchema.method.validatePassword = function (password) {
+userSchema.methods.validatePassword = function (password) {
   //generates a hash of the given password using the same salt that was used to hash the user's password
   const hash = crypto
     .pbkdf2Sync(password, this.salt, 10000, 512, 'sha512')

@@ -6,7 +6,6 @@ const signup = async (req, res) => {
   try {
     const { username, password, displayName } = req.body;
 
-    //check if user is already exists
     const user = await userModel.findOne({ username });
 
     if (user)
@@ -17,11 +16,11 @@ const signup = async (req, res) => {
     newUser.username = username;
     newUser.displayName = displayName;
     newUser.setPassword(password);
-o
-    await user.save();
+
+    await newUser.save();
 
     const token = jsonwebtoken.sign(
-      { data: user.id },
+      { data: newUser.id },
       process.env.JWT_TOKEN_SECRET,
       { expiresIn: '24h' }
     );
@@ -29,7 +28,7 @@ o
     responseHandler.createdResponse(res, {
       token,
       ...newUser._doc,
-      id: user.id,
+      id: newUser.id,
     });
   } catch (err) {
     responseHandler.errorResponse(res);
