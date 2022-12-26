@@ -9,6 +9,8 @@ import {
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { setUser } from '../../redux/features/userSlice';
+import menuConfigs from './../../configs/menuConfigs';
 
 const UserMenu = () => {
   const { user } = useSelector((state) => state.user);
@@ -17,7 +19,7 @@ const UserMenu = () => {
 
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const toggleMenu = (e) => setAnchorEl(e.current.target);
+  const toggleMenu = (e) => setAnchorEl(e.currentTarget);
 
   return (
     <>
@@ -36,7 +38,7 @@ const UserMenu = () => {
           <Menu
             open={Boolean(anchorEl)}
             anchorEl={anchorEl}
-            onClose={setAnchorEl(null)}
+            onClose={() => setAnchorEl(null)}
             PaperProps={{ sx: { padding: 0 } }}
           >
             {menuConfigs.user.map((item, index) => (

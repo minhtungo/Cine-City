@@ -49,7 +49,7 @@ const login = async (req, res) => {
         'Invalid username or password'
       );
 
-    if (!user.validPassword(password))
+    if (!user.validatePassword(password))
       return responseHandler.badRequestResponse(res, 'Invalid password');
 
     const token = jsonwebtoken.sign(
@@ -63,7 +63,7 @@ const login = async (req, res) => {
 
     responseHandler.successResponse(res, {
       token,
-      ...newUser._doc,
+      ...user._doc,
       id: user.id,
     });
   } catch (error) {
@@ -80,7 +80,7 @@ const updatePassword = async (req, res) => {
       .select('password id salt');
 
     if (!user) return responseHandler.unauthorizedResponse(res);
-    if (!user.validPassword(currentPassword))
+    if (!user.validatePassword(currentPassword))
       return responseHandler.badRequestResponse(res, 'Invalid password');
 
     user.setPassword(newPassword);

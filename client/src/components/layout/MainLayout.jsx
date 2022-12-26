@@ -4,6 +4,10 @@ import { Outlet } from 'react-router-dom';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
 import AuthModal from './../common/AuthModal';
+import {useDispatch, useSelector} from 'react-redux';
+import {useEffect} from 'react';
+import {toast} from 'react-toastify';
+
 
 const MainLayout = () => {
   return (

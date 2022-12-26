@@ -25,7 +25,7 @@ const AuthModal = () => {
   }, [authModalOpen]);
 
   const handleClose = () => {
-    dispatch(setAuthModalOpenalOpen(false));
+    dispatch(setAuthModalOpen(false));
   };
 
   const switchAuthState = (state) => setAction(state);
