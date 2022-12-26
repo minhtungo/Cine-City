@@ -19,6 +19,8 @@ import onSwitchThemeMode from '../../utils/switchThemeUtils';
 import Logo from './Logo';
 import menuConfigs from './../../configs/menuConfigs';
 
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+
 const Sidebar = ({ isOpened, toggleSidebar }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
@@ -99,7 +101,7 @@ const Sidebar = ({ isOpened, toggleSidebar }) => {
         <Typography variant='h6' marginBottom='20px'>
           Theme
         </Typography>
-        <ListItemButton>
+        <ListItemButton onClick={onSwitchThemeMode}>
           <ListItemIcon>
             {themeMode === themeModes.dark ? (
               <DarkModeOutlinedIcon />

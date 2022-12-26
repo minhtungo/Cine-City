@@ -8,6 +8,12 @@ import LockResetOutlinedIcon from '@mui/icons-material/LockResetOutlined';
 
 const main = [
   {
+    label: 'home',
+    path: '/',
+    icon: <HomeOutlinedIcon />,
+    state: 'home',
+  },
+  {
     label: 'movies',
     path: '/movie',
     icon: <SlideshowOutlinedIcon />,
