@@ -1,5 +1,5 @@
 import Home from '../pages/Home';
-import UserInfo from '../pages/UserInfo';
+import PersonInfo from '../pages/PersonInfo';
 import MediaSearch from '../pages/MediaSearch';
 import MediaList from '../pages/MediaList';
 import ProtectedPage from '../components/common/ProtectedPage';
@@ -13,7 +13,7 @@ export const routeEndpoints = {
   mediaList: (type) => `/${type}`,
   mediaDetail: (type, id) => `/${type}/${id}`,
   mediaSearch: '/search',
-  user: (id) => `/user/${id}`,
+  person: (id) => `/person/${id}`,
   favoriteList: '/favorites',
   reviewList: '/reviews',
   updatePassword: '/update-password',
@@ -26,8 +26,8 @@ const routes = [
     state: 'home',
   },
   {
-    path: '/user/:userId',
-    element: <UserInfo />,
+    path: '/person/:personId',
+    element: <PersonInfo />,
     state: 'userInfo',
   },
   {

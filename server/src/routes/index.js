@@ -5,7 +5,7 @@ import reviewRoute from './reviewRoute.js';
 
 const router = express.Router();
 
-router.use('/user', userRoute);
+router.use('/person', userRoute);
 router.use('/:mediaType', mediaRoute);
 router.use('reviews', reviewRoute);
 
