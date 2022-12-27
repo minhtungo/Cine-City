@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-import { setAuthModalOpen } from '../redux/features/authModalSlice';
-import userApi from './../api/modules/userApi';
-import { setUser } from './../redux/features/userSlice';
+import { setAuthModalOpen } from '../../redux/features/authModalSlice';
+import userApi from '../../api/modules/userApi';
+import { setUser } from '../../redux/features/userSlice';
 
 const SignUp = ({ switchAuthState }) => {
   const dispatch = useDispatch();
@@ -81,7 +81,9 @@ const SignUp = ({ switchAuthState }) => {
             signUpForm.touched.displayName &&
             signUpForm.errors.displayName !== undefined
           }
-          helperText={signUpForm.touched.displayName && signUpForm.errors.displayName}
+          helperText={
+            signUpForm.touched.displayName && signUpForm.errors.displayName
+          }
         />
 
         <TextField
@@ -111,7 +113,10 @@ const SignUp = ({ switchAuthState }) => {
             signUpForm.touched.confirmPassword &&
             signUpForm.errors.confirmPassword !== undefined
           }
-          helperText={signUpForm.touched.confirmPassword && signUpForm.errors.confirmPassword}
+          helperText={
+            signUpForm.touched.confirmPassword &&
+            signUpForm.errors.confirmPassword
+          }
         />
       </Stack>
       <LoadingButton

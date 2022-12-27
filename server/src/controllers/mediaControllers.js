@@ -39,7 +39,7 @@ const searchMedia = async (req, res) => {
     const { mediaType } = req.params;
     const { query, page } = req.query;
 
-    mediaType = mediaType === 'people' ? 'person' : mediaType;
+    mediaType = mediaType === 'people' ? 'cast' : mediaType;
 
     const response = await tmdbApi.searchMedia({ mediaType, query, page });
 

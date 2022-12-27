@@ -7,8 +7,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import tmdbConfigs from '../../api/configs/tmdbConfigs';
 import { routeEndpoints } from '../../routes/routes';
 import uiConfigs from '../../configs/uiConfigs';
-import favoriteUtils from './../../utils/favoriteUtils';
-import CircularBar from './CircularBar';
+import favoriteUtils from '../../utils/favoriteUtils';
+import CircularBar from '../common/CircularBar';
 
 const MediaItem = ({ media, mediaType }) => {
   const { favoriteList } = useSelector((state) => state.user);
@@ -43,7 +43,7 @@ const MediaItem = ({ media, mediaType }) => {
       to={
         mediaType !== 'people'
           ? routeEndpoints.mediaDetail(mediaType, media.id || media.mediaId)
-          : routeEndpoints.person(media.id)
+          : routeEndpoints.cast(media.id)
       }
     >
       <Box

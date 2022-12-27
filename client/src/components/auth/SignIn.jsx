@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-import { setAuthModalOpen } from '../redux/features/authModalSlice';
-import userApi from './../api/modules/userApi';
-import { setUser } from './../redux/features/userSlice';
+import { setAuthModalOpen } from '../../redux/features/authModalSlice';
+import userApi from '../../api/modules/userApi';
+import { setUser } from '../../redux/features/userSlice';
 
 const SignIn = ({ switchAuthState }) => {
   const dispatch = useDispatch();

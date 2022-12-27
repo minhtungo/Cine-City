@@ -2,8 +2,8 @@ import { Box, Modal } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuthModalOpen } from '../../redux/features/authModalSlice';
-import SignIn from '../SignIn';
-import SignUp from '../SignUp';
+import SignIn from '../auth/SignIn';
+import SignUp from '../auth/SignUp';
 import Logo from './Logo';
 
 const actionState = {

@@ -3,7 +3,7 @@ import tmdbConfigs from '../api/configs/tmdbConfigs';
 import uiConfigs from '../configs/uiConfigs';
 import Container from './../components/common/Container';
 import { Box } from '@mui/material';
-import Media from '../components/common/Media';
+import Media from '../components/medias/Media';
 
 const Home = () => {
   return (

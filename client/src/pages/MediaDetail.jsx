@@ -11,17 +11,17 @@ import { toast } from 'react-toastify';
 
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice';
 import mediaApi from '../../src/api/modules/mediaApi';
-import ImageHeader from './../components/common/ImageHeader';
+import ImageHeader from '../components/medias/ImageHeader';
 import tmdbConfigs from './../api/configs/tmdbConfigs';
 import uiConfigs from '../configs/uiConfigs';
 import CircularBar from './../components/common/CircularBar';
-import Cast from '../components/Cast';
+import Cast from '../components/medias/Cast';
 import Container from './../components/common/Container';
 import { setAuthModalOpen } from '../redux/features/authModalSlice';
 import favoriteApi from '../api/modules/favoriteApi';
 import { addFavorite, removeFavorite } from '../redux/features/userSlice';
-import MediaVideos from './../components/common/MediaVideos';
-import Backdrops from '../components/common/Backdrops';
+import MediaVideos from '../components/medias/MediaVideos';
+import Backdrops from '../components/medias/Backdrops';
 
 const MediaDetail = () => {
   const { mediaType, mediaId } = useParams();

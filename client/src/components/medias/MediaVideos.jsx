@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
 import { useEffect, useRef } from 'react';
 import { SwiperSlide } from 'swiper/react';
-import tmdbConfigs from './../../api/configs/tmdbConfigs';
-import NavigationSwiper from './NavigationSwiper';
+import tmdbConfigs from '../../api/configs/tmdbConfigs';
+import NavigationSwiper from '../common/NavigationSwiper';
 
 const Video = ({ video }) => {
   const iframeRef = useRef(null);
@@ -27,7 +27,6 @@ const Video = ({ video }) => {
 };
 
 const MediaVideos = ({ videos }) => {
-  console.log(videos);
   return (
     <NavigationSwiper>
       {videos.map((video, index) => (
