@@ -17,13 +17,19 @@ const main = [
     label: 'movies',
     path: '/movie',
     icon: <SlideshowOutlinedIcon />,
-    state: 'movie',
+    state: 'movies',
   },
   {
-    label: 'tv series',
+    label: 'tv shows',
     path: '/tv',
     icon: <LiveTvOutlinedIcon />,
     state: 'tv',
+  },
+  {
+    label: 'my list',
+    path: '/favorites',
+    icon: <FavoriteBorderOutlinedIcon />,
+    state: 'favorites',
   },
   {
     label: 'search',

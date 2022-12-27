@@ -52,7 +52,7 @@ const UserMenu = () => {
                 <ListItemText
                   disableTypography
                   primary={
-                    <Typography textTransform='uppercase'>
+                    <Typography textTransform='capitalize'>
                       {item.label}
                     </Typography>
                   }
@@ -69,7 +69,7 @@ const UserMenu = () => {
               <ListItemText
                 disableTypography
                 primary={
-                  <Typography textTransform='uppercase'>Logout</Typography>
+                  <Typography textTransform='capitalize'>Logout</Typography>
                 }
               />
             </ListItemButton>

@@ -21,6 +21,7 @@ import { setAuthModalOpen } from '../redux/features/authModalSlice';
 import favoriteApi from '../api/modules/favoriteApi';
 import { addFavorite, removeFavorite } from '../redux/features/userSlice';
 import MediaVideos from './../components/common/MediaVideos';
+import Backdrops from '../components/common/Backdrops';
 
 const MediaDetail = () => {
   const { mediaType, mediaId } = useParams();
@@ -245,6 +246,13 @@ const MediaDetail = () => {
             <MediaVideos videos={[...media.videos.results].splice(0, 5)} />
           </Container>
         </div>
+
+        {/* Backdrops */}
+        {media.images.backdrops.length > 0 && (
+          <Container header='Backdrops'>
+            <Backdrops backdrops={media.images.backdrops} />
+          </Container>
+        )}
       </Box>
     </>
   ) : (

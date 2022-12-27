@@ -67,6 +67,7 @@ const Header = () => {
           <Toolbar
             sx={{ alignItems: 'center', justifyContent: 'space-between' }}
           >
+            {/* Hamberger Menu */}
             <Stack direction='row' spacing={1} alignItems='center'>
               <IconButton
                 color='inherit'
@@ -79,7 +80,7 @@ const Header = () => {
                 <Logo />
               </Box>
             </Stack>
-            {/* main menu */}
+            {/* main menu on desktop*/}
             <Box
               flexGrow={1}
               alignItems='center'
@@ -104,6 +105,9 @@ const Header = () => {
                   {menu.label}
                 </Button>
               ))}
+            </Box>
+            {/* user menu */}
+            <Stack spacing={2} direction='row' alignItems='center'>
               <IconButton sx={{ color: 'inherit' }} onClick={switchTheme}>
                 {themeMode === themeModes.dark ? (
                   <DarkModeOutlinedIcon />
@@ -111,9 +115,6 @@ const Header = () => {
                   <WbSunnyOutlinedIcon />
                 )}
               </IconButton>
-            </Box>
-            {/* user menu */}
-            <Stack spacing={3} direction='row' alignItems='center'>
               {!user && (
                 <Button
                   variant='contained'
