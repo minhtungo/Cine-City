@@ -30,4 +30,4 @@ mongoose
     // res.status(500).send({ error: 'Error connecting to the database' });
   });
 
-export default app;
+

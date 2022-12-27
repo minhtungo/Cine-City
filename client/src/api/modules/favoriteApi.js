@@ -39,7 +39,7 @@ const favoriteApi = {
   removeFavorite: async ({ favoriteId }) => {
     try {
       const response = await userClient.delete(
-        favoriteEndpoints.remove({ favoriteId })
+        favoriteEndpoints.removeFavorite({ favoriteId })
       );
       return { response };
     } catch (error) {

@@ -1,7 +1,6 @@
 import express from 'express';
 import { body } from 'express-validator';
 import favoriteController from '../controllers/favoriteController.js';
-// import favoriteControllers from '../controllers/favoriteControllers.js';
 import userControllers from '../controllers/userController.js';
 import requestHandler from '../handlers/requestHandler.js';
 import tokenMiddleware from '../middlewares/tokenMiddleware.js';
@@ -93,16 +92,20 @@ router.put(
 
 router.get('/info', tokenMiddleware.auth, userControllers.getUserInfo);
 
-router.get('/favorites', tokenMiddleware.auth, favoriteController.getFavoriteList);
+router.get(
+  '/favorites',
+  tokenMiddleware.auth,
+  favoriteController.getFavoriteList
+);
 
 router.post(
   '/favorites',
   tokenMiddleware.auth,
   body('mediaType')
     .exists()
-    .custom((type) =>
-      ['movie', 'tv'].includes(type).withMessage('Invalid media type')
-    ),
+    .withMessage('mediaType is required')
+    .custom((type) => ['movie', 'tv'].includes(type))
+    .withMessage('Invalid media type'),
   body('mediaId')
     .exists()
     .withMessage('Media ID is required')

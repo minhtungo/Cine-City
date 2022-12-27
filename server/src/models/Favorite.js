@@ -1,34 +1,37 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import modelOptions from './modelOptions.js';
 
-const favoriteSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
+const favoriteSchema = new mongoose.Schema(
+  {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+    mediaType: {
+      type: String,
+      enum: ['tv', 'movie'],
+      required: true,
+    },
+    mediaId: {
+      type: String,
+      required: true,
+    },
+    mediaTitle: {
+      type: String,
+      required: true,
+    },
+    mediaPoster: {
+      type: String,
+      required: true,
+    },
+    mediaRate: {
+      type: Number,
+      required: true,
+    },
   },
-  mediaType: {
-    type: String,
-    enum: ['tv', 'movie'],
-    required: true,
-  },
-  mediaId: {
-    type: String,
-    required: true,
-  },
-  mediaTitle: {
-    type: String,
-    required: true,
-  },
-  mediaPoster: {
-    type: String,
-    required: true,
-  },
-  mediaRating: {
-    type: Number,
-    required: true,
-  },
-}, modelOptions);
+  modelOptions
+);
 
 const favoriteModel = mongoose.model('Favorite', favoriteSchema);
 

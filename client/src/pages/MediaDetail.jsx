@@ -17,6 +17,9 @@ import uiConfigs from '../configs/uiConfigs';
 import CircularBar from './../components/common/CircularBar';
 import Cast from '../components/Cast';
 import Container from './../components/common/Container';
+import { setAuthModalOpen } from '../redux/features/authModalSlice';
+import favoriteApi from '../api/modules/favoriteApi';
+import { addFavorite, removeFavorite } from '../redux/features/userSlice';
 
 const MediaDetail = () => {
   const { mediaType, mediaId } = useParams();
@@ -40,6 +43,8 @@ const MediaDetail = () => {
       });
       dispatch(setGlobalLoading(false));
 
+      console.log(response);
+
       if (response) {
         setMedia(response);
         setGenres(response.genres);
@@ -51,6 +56,60 @@ const MediaDetail = () => {
 
     getMedia();
   }, [mediaType, mediaId, dispatch]);
+
+  const onFavoriteClick = async () => {
+    if (!user) return dispatch(setAuthModalOpen(true));
+
+    if (isLoading) return;
+
+    if (isFavorite) {
+      onRemoveFavorite();
+      return;
+    }
+
+    setIsLoading(true);
+
+    const body = {
+      mediaId: mediaId,
+      mediaTitle: media.title || media.name,
+      mediaType: mediaType,
+      mediaPoster: media.poster_path,
+      mediaRate: media.vote_average,
+    };
+
+    const { response, error } = await favoriteApi.addFavorite(body);
+
+    setIsLoading(false);
+
+    if (error) toast.error(error.message);
+    if (response) {
+      dispatch(addFavorite(response));
+      setIsFavorite(true);
+      toast.success('Added to favorite list');
+    }
+  };
+
+  const onRemoveFavorite = async () => {
+    if (isLoading) return;
+    setIsLoading(true);
+
+    const favorite = favoriteList.find(
+      (favorite) => favorite.mediaId.toString() === media.id.toString()
+    );
+
+    const { response, error } = await favoriteApi.removeFavorite({
+      favoriteId: favorite.id,
+    });
+    setIsLoading(false);
+
+    if (error) toast.error(error.message);
+
+    if (response) {
+      dispatch(removeFavorite(favorite));
+      setIsFavorite(false);
+      toast.success('Removed from favorite list');
+    }
+  };
 
   return media ? (
     <>
@@ -159,6 +218,7 @@ const MediaDetail = () => {
                     }
                     loadingPosition='start'
                     loading={isLoading}
+                    onClick={onFavoriteClick}
                   />
                   <Button
                     variant='contained'

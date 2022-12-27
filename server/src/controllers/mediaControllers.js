@@ -69,7 +69,10 @@ const getMediaDetail = async (req, res) => {
       const user = await userModel.findById(tokenDecoded.data);
 
       if (user) {
-        const isFavorite = favoriteModel.findOne({ user: user.id, mediaId });
+        const isFavorite = await favoriteModel.findOne({
+          user: user.id,
+          mediaId,
+        });
         media.isFavorite = isFavorite !== null;
       }
     }

@@ -5,13 +5,13 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import tmdbConfigs from '../../api/configs/tmdbConfigs';
-import routes, { routeEndpoints } from '../../routes/routes';
+import { routeEndpoints } from '../../routes/routes';
 import uiConfigs from '../../configs/uiConfigs';
 import favoriteUtils from './../../utils/favoriteUtils';
 import CircularBar from './CircularBar';
 
 const MediaItem = ({ media, mediaType }) => {
-  const { listFavorites } = useSelector((state) => state.user);
+  const { favoriteList } = useSelector((state) => state.user);
 
   const [title, setTitle] = useState('');
   const [posterPath, setPosterPath] = useState('');
@@ -60,14 +60,14 @@ const MediaItem = ({ media, mediaType }) => {
       >
         {mediaType !== 'people' && (
           <>
-            {favoriteUtils.check({ listFavorites, mediaId: media.id }) && (
+            {favoriteUtils.check({ favoriteList, mediaId: media.id }) && (
               <FavoriteIcon
                 color='primary'
                 sx={{
                   position: 'absolute',
-                  top: 2,
-                  right: 2,
-                  fontSize: '2rem',
+                  top: 5,
+                  right: 5,
+                  fontSize: '1.5rem',
                 }}
               />
             )}
