@@ -7,11 +7,7 @@ import routes from './src/routes/index.js';
 
 const app = express();
 
-app.use(
-  cors({
-    origin: ['http://127.0.0.1:5173', 'https://cine-city.vercel.app'],
-  })
-);
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
