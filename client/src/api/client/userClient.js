@@ -3,7 +3,7 @@ import queryString from 'query-string';
 
 const baseURL = import.meta.env.DEV
   ? 'http://127.0.0.1:5000/api/v1/'
-  : 'https://cine-city-api-minhtungo.vercel.app/api/v1/';
+  : 'https://cine-city-api.vercel.app/api/v1/';
 
 const userClient = axios.create({
   baseURL,

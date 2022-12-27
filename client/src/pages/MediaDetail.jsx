@@ -20,6 +20,7 @@ import Container from './../components/common/Container';
 import { setAuthModalOpen } from '../redux/features/authModalSlice';
 import favoriteApi from '../api/modules/favoriteApi';
 import { addFavorite, removeFavorite } from '../redux/features/userSlice';
+import MediaVideos from './../components/common/MediaVideos';
 
 const MediaDetail = () => {
   const { mediaType, mediaId } = useParams();
@@ -42,8 +43,6 @@ const MediaDetail = () => {
         mediaId,
       });
       dispatch(setGlobalLoading(false));
-
-      console.log(response);
 
       if (response) {
         setMedia(response);
@@ -240,6 +239,12 @@ const MediaDetail = () => {
             </Box>
           </Box>
         </Box>
+        {/* videos */}
+        <div ref={videoRef} style={{ paddingTop: '2rem' }}>
+          <Container header='Videos'>
+            <MediaVideos videos={media.videos.results} />
+          </Container>
+        </div>
       </Box>
     </>
   ) : (
