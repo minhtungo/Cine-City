@@ -27,13 +27,14 @@ const Video = ({ video }) => {
 };
 
 const MediaVideos = ({ videos }) => {
+  console.log(videos);
   return (
     <NavigationSwiper>
-      {videos.map((video, index) => {
-        <SwiperSlide key={index * Math.random()}>
+      {videos.map((video, index) => (
+        <SwiperSlide key={index}>
           <Video video={video} />
-        </SwiperSlide>;
-      })}
+        </SwiperSlide>
+      ))}
     </NavigationSwiper>
   );
 };
