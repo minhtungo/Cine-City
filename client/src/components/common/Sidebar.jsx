@@ -41,7 +41,7 @@ const Sidebar = ({ isOpened, toggleSidebar }) => {
         </Typography>
         {menuConfigs.main.map((item, index) => (
           <ListItemButton
-            key={index * Math.random() * Math.random()}
+            key={item.label}
             sx={{
               borderRadius: '10px',
               marginY: 1,
@@ -72,7 +72,7 @@ const Sidebar = ({ isOpened, toggleSidebar }) => {
             </Typography>
             {menuConfigs.user.map((item, index) => (
               <ListItemButton
-                key={index * Math.random() * Math.random()}
+                key={item.path}
                 sx={{
                   borderRadius: '10px',
                   marginY: 1,

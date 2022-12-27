@@ -21,8 +21,8 @@ const Cast = ({ casts }) => {
         grabCursor
         style={{ width: '100%', height: 'max-content' }}
       >
-        {casts.map((cast, index) => (
-          <SwiperSlide key={index}>
+        {casts.map((cast) => (
+          <SwiperSlide key={cast.id}>
             <Link to={routeEndpoints.person(cast.id)}>
               <Box
                 sx={{

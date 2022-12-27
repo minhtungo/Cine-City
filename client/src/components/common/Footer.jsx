@@ -18,7 +18,7 @@ const Footer = () => {
           <Box>
             {menuConfigs.main.map((item, index) => (
               <Button
-                key={index * Math.random() * Math.random()}
+                key={item.label}
                 sx={{ color: 'inherit', marginLeft: '1rem' }}
                 component={Link}
                 to={item.path}

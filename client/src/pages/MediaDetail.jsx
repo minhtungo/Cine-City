@@ -127,7 +127,7 @@ const MediaDetail = () => {
                       label={genre.name}
                       variant='filled'
                       color='primary'
-                      key={index}
+                      key={genre.id}
                     />
                   ))}
                 </Stack>

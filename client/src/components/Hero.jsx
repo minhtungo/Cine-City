@@ -154,11 +154,11 @@ const Hero = ({ mediaType, mediaCategory }) => {
                     <CircularBar value={movie.vote_average} />
                     {/* genres */}
                     <Divider orientation='vertical' />
-                    {[...movie.genre_ids].map((genreId) => (
+                    {[...movie.genre_ids].map((genreId, index) => (
                       <Chip
                         variant='filled'
                         color='primary'
-                        key={movie.id}
+                        key={movie.id + genreId}
                         label={
                           genres.find((e) => e.id === genreId) &&
                           genres.find((e) => e.id === genreId).name
@@ -181,7 +181,9 @@ const Hero = ({ mediaType, mediaCategory }) => {
                     component={Link}
                     to={routeEndpoints.mediaDetail(mediaType, movie.id)}
                     sx={{ width: 'max-content' }}
-                  >Watch Now</Button>
+                  >
+                    Watch Now
+                  </Button>
                 </Stack>
               </Box>
             </Box>

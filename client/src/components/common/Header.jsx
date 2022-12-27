@@ -90,7 +90,7 @@ const Header = () => {
               </Box>
               {menuConfigs.main.map((menu, index) => (
                 <Button
-                  key={index * Math.random() * Math.random()}
+                  key={menu.state}
                   sx={{
                     color: appState.includes(menu.state)
                       ? 'primary.contrastText'

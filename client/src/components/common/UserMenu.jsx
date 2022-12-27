@@ -45,7 +45,7 @@ const UserMenu = () => {
               <ListItemButton
                 component={Link}
                 to={item.path}
-                key={index * Math.random() * Math.random()}
+                key={item.label}
                 onClick={() => setAnchorEl(null)}
               >
                 <ListItemIcon>{item.icon}</ListItemIcon>
