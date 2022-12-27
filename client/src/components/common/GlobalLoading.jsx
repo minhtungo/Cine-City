@@ -12,9 +12,7 @@ const GlobalLoading = () => {
     if (globalLoading) {
       setIsLoading(true);
     } else {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
+      setIsLoading(false);
     }
   }, [globalLoading]);
 

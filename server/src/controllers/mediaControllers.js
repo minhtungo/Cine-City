@@ -80,7 +80,8 @@ const getMediaDetail = async (req, res) => {
       .sort('-createdAt');
 
     responseHandler.successResponse(res, media);
-  } catch {
+  } catch (error) {
+    console.log(error);
     responseHandler.errorResponse(res);
   }
 };

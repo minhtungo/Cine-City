@@ -7,17 +7,27 @@ const tmdbApi = {
       tmdbEndpoints.mediaList({ mediaType, mediaCategory, page })
     ),
   mediaDetail: async ({ mediaType, mediaId }) =>
-    await axiosClient.fetchData(tmdbEndpoints.mediaDetail({ mediaType, mediaId })),
+    await axiosClient.fetchData(
+      tmdbEndpoints.mediaDetails({ mediaType, mediaId })
+    ),
   mediaGenres: async ({ mediaType }) =>
     await axiosClient.fetchData(tmdbEndpoints.mediaGenres({ mediaType })),
   mediaCredits: async ({ mediaType, mediaId }) =>
-    await axiosClient.fetchData(tmdbEndpoints.mediaCredits({ mediaType, mediaId })),
+    await axiosClient.fetchData(
+      tmdbEndpoints.mediaCredits({ mediaType, mediaId })
+    ),
   mediaVideos: async ({ mediaType, mediaId }) =>
-    await axiosClient.fetchData(tmdbEndpoints.mediaVideos({ mediaType, mediaId })),
+    await axiosClient.fetchData(
+      tmdbEndpoints.mediaVideos({ mediaType, mediaId })
+    ),
   mediaImages: async ({ mediaType, mediaId }) =>
-    await axiosClient.fetchData(tmdbEndpoints.mediaImages({ mediaType, mediaId })),
+    await axiosClient.fetchData(
+      tmdbEndpoints.mediaImages({ mediaType, mediaId })
+    ),
   mediaRecommend: async ({ mediaType, mediaId }) =>
-    await axiosClient.fetchData(tmdbEndpoints.mediaRecommend({ mediaType, mediaId })),
+    await axiosClient.fetchData(
+      tmdbEndpoints.mediaRecommendations({ mediaType, mediaId })
+    ),
   mediaSearch: async ({ mediaType, query, page }) =>
     await axiosClient.fetchData(
       tmdbEndpoints.mediaSearch({ mediaType, query, page })
