@@ -8,6 +8,7 @@ import reviewModel from '../models/Review.js';
 const getMediaList = async (req, res) => {
   try {
     const { page } = req.query;
+
     const { mediaType, mediaCategory } = req.params;
 
     const response = await tmdbApi.mediaList({

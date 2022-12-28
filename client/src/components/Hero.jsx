@@ -87,8 +87,8 @@ const Hero = ({ mediaType, mediaCategory }) => {
         //   disableOnInteraction: false,
         // }}
       >
-        {movies.map((movie, index) => (
-          <SwiperSlide key={movie.title + movie.id}>
+        {[...movies].splice(0, 5).map((movie, index) => (
+          <SwiperSlide key={movie.title}>
             <Box
               sx={{
                 paddingTop: {
@@ -158,7 +158,7 @@ const Hero = ({ mediaType, mediaCategory }) => {
                       <Chip
                         variant='filled'
                         color='primary'
-                        key={movie.id + genreId + index}
+                        key={`${movie.id}-${genreId}-${index}`}
                         label={
                           genres.find((e) => e.id === genreId) &&
                           genres.find((e) => e.id === genreId).name

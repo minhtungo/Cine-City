@@ -24,7 +24,7 @@ const App = () => {
       <CssBaseline />
       <ToastContainer
         position='bottom-right'
-        autoClose={5000}
+        autoClose={2500}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -39,7 +39,7 @@ const App = () => {
               route.index ? (
                 <Route
                   index
-                  key={route.state + route.index}
+                  key={index}
                   element={
                     route.state ? (
                       <Wrapper state={route.state}>{route.element}</Wrapper>
@@ -51,7 +51,7 @@ const App = () => {
               ) : (
                 <Route
                   path={route.path}
-                  key={route.state + route.index}
+                  key={index}
                   element={
                     route.state ? (
                       <Wrapper state={route.state}>{route.element}</Wrapper>

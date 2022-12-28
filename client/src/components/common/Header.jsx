@@ -91,7 +91,7 @@ const Header = () => {
               </Box>
               {menuConfigs.main.map((menu, index) => (
                 <Button
-                  key={menu.state}
+                  key={`${menu.state}-${index}`}
                   sx={{
                     color: appState.includes(menu.state)
                       ? 'primary.contrastText'

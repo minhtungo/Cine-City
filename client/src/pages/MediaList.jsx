@@ -28,7 +28,8 @@ const MediaList = () => {
 
   useEffect(() => {
     dispatch(setAppState(mediaType));
-  }, [mediaType]);
+    window.scrollTo(0, 0);
+  }, [mediaType, dispatch]);
 
   useEffect(() => {
     const getMedias = async () => {
@@ -55,19 +56,12 @@ const MediaList = () => {
     };
 
     if (mediaType !== prevMediaType) {
-      setCurrPage(1);
       setCurrCategory(0);
+      setCurrPage(1);
     }
 
     getMedias();
-  }, [
-    mediaType,
-    currCategory,
-    currPage,
-    prevMediaType,
-    mediaCategories,
-    dispatch,
-  ]);
+  }, [mediaType, currCategory, currPage, mediaCategories, dispatch]);
 
   const onCategoryChange = (categoryIndex) => {
     if (currCategory === categoryIndex) return;
@@ -76,7 +70,7 @@ const MediaList = () => {
     setCurrCategory(categoryIndex);
   };
 
-  const onLoadMore = () => setCurrPage((currPage) => currPage + 1);
+  const onLoadMore = () => setCurrPage(currPage + 1);
 
   return (
     <>
@@ -102,7 +96,7 @@ const MediaList = () => {
           <Stack direction='row' spacing={2}>
             {mediaCategories.map((category, index) => (
               <Button
-                key={index}
+                key={`index-${index}-${category}`}
                 size='large'
                 variant={currCategory === index ? 'contained' : 'text'}
                 sx={{
@@ -123,6 +117,7 @@ const MediaList = () => {
           sx={{ marginTop: 8 }}
           fullWidth
           color='primary'
+          loading={isLoading}
           onClick={onLoadMore}
         >
           Load More

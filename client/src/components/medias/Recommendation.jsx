@@ -6,7 +6,7 @@ const Recommendation = ({ medias, mediaType }) => {
   return (
     <AutoSwiper>
       {medias.map((media, index) => (
-        <SwiperSlide key={index}>
+        <SwiperSlide key={`${mediaType}-${index}`}>
           <MediaItem media={media} mediaType={mediaType} />
         </SwiperSlide>
       ))}
