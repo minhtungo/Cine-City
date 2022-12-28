@@ -1,5 +1,4 @@
 import Home from '../pages/Home';
-import CastInfo from '../pages/CastInfo';
 import MediaSearch from '../pages/MediaSearch';
 import MediaList from '../pages/MediaList';
 import ProtectedPage from '../components/common/ProtectedPage';
@@ -7,6 +6,7 @@ import UpdatePassword from './../pages/UpdatePassword';
 import FavoriteList from './../pages/FavoriteList';
 import ReviewList from './../pages/ReviewList';
 import MediaDetail from './../pages/MediaDetail';
+import CastDetail from './../components/medias/CastDetail';
 
 export const routeEndpoints = {
   home: '/',
@@ -27,7 +27,7 @@ const routes = [
   },
   {
     path: '/cast/:castId',
-    element: <CastInfo />,
+    element: <CastDetail />,
     state: 'castInfo',
   },
   {
