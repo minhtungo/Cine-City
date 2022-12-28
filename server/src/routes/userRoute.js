@@ -63,7 +63,7 @@ router.post(
 );
 
 router.put(
-  'update-password',
+  '/update-password',
   tokenMiddleware.auth,
   body('currentPassword')
     .exists()
@@ -81,7 +81,7 @@ router.put(
     .isLength({ min: 5 })
     .withMessage('Confirm password must be at least 5 characters long')
     .custom((value, { req }) => {
-      if (value !== req.body.password) {
+      if (value !== req.body.newPassword) {
         throw new Error('Passwords must match');
       }
       return true;

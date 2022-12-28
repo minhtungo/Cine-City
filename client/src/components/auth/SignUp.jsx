@@ -24,16 +24,17 @@ const SignUp = ({ switchAuthState }) => {
     },
     validationSchema: Yup.object({
       username: Yup.string()
-        .min(5, 'User should be at least 5 characters long')
+        .min(5, 'User should be at least 5 characters')
         .required('Username is required'),
       password: Yup.string()
-        .min(5, 'Password should be at least 5 characters long')
+        .min(5, 'Password should be at least 5 characters')
         .required('Password is required'),
       confirmPassword: Yup.string()
-        .min(5, 'Confirm password should be at least 5 characters long')
+        .oneOf([Yup.ref('password')], 'Passwords must match')
+        .min(5, 'Confirm password should be at least 5 characters')
         .required('Confirm password is required'),
       displayName: Yup.string()
-        .min(5, 'Display name should be at least 5 characters long')
+        .min(5, 'Display name should be at least 5 characters')
         .required('Display name is required'),
     }),
     onSubmit: async (values) => {

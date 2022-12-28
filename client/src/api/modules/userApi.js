@@ -49,7 +49,7 @@ const userApi = {
     confirmNewPassword,
   }) => {
     try {
-      const response = await userClient.post(userEndpoints.updatePassword, {
+      const response = await userClient.put(userEndpoints.updatePassword, {
         currentPassword,
         newPassword,
         confirmNewPassword,
