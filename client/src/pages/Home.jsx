@@ -25,7 +25,7 @@ const Home = () => {
           />
         </Container>
 
-        <Container header={'popular shows'}>
+        <Container header={'popular series'}>
           <Media
             mediaType={tmdbConfigs.mediaType.tv}
             mediaCategory={tmdbConfigs.mediaCategory.popular}
@@ -34,11 +34,11 @@ const Home = () => {
 
         <Container header={'top rated movies'}>
           <Media
-            mediaType={tmdbConfigs.mediaType.tv}
+            mediaType={tmdbConfigs.mediaType.movie}
             mediaCategory={tmdbConfigs.mediaCategory.top_rated}
           />
         </Container>
-        <Container header={'top rated shows'}>
+        <Container header={'top rated series'}>
           <Media
             mediaType={tmdbConfigs.mediaType.tv}
             mediaCategory={tmdbConfigs.mediaCategory.top_rated}

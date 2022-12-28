@@ -9,7 +9,7 @@ const NavigationSwiper = ({ children }) => {
         '& .swiper-slide': {
           width: '100%',
           opacity: '0.6',
-          paddingBottom: '3rem',
+          paddingBottom: '2.6rem',
         },
         '& .swiper-slide-active': { opacity: 1 },
         '& .swiper-pagination-bullet': {
@@ -18,11 +18,11 @@ const NavigationSwiper = ({ children }) => {
         '& .swiper-button-next, & .swiper-button-prev': {
           color: 'text.primary',
           '&::after': {
-            fontSize: { xs: '1rem', md: '2rem' },
+            fontSize: { xs: '1rem', md: '1.8rem' },
           },
         },
         '& .swiper': {
-          paddingX: { xs: '1rem', md: '4rem' },
+          paddingX: { xs: '1rem', md: '3rem' },
         },
       }}
     >

@@ -13,13 +13,13 @@ const createReview = async (req, res) => {
 
     await newReview.save();
 
-    responseHandler.success(res, {
+    responseHandler.successResponse(res, {
       ...review._doc,
       id: review.id,
       user: req.user,
     });
   } catch (error) {
-    responseHandler.error(res);
+    responseHandler.errorResponse(res);
   }
 };
 
@@ -38,7 +38,7 @@ const removeReview = async (req, res) => {
 
     responseHandler.successResponse(res);
   } catch (error) {
-    responseHandler.error(res);
+    responseHandler.errorResponse(res);
   }
 };
 
@@ -50,9 +50,9 @@ const getReviewsList = async (req, res) => {
       })
       .sort('-createdAt');
 
-    responseHandler.success(res, reviews);
+    responseHandler.successResponse(res, reviews);
   } catch (error) {
-    responseHandler.error(res);
+    responseHandler.errorResponse(res);
   }
 };
 

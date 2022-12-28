@@ -1,13 +1,13 @@
-import userClient from '../userClient';
+import userClient from '../client/userClient';
 
 const reviewEndpoints = {
   list: 'reviews',
-  create: 'reviews',
-  remove: ({ reviewId }) => `review/${reviewId}`,
+  add: 'reviews',
+  remove: ({ reviewId }) => `reviews/${reviewId}`,
 };
 
 const reviewApi = {
-  createReview: async ({
+  addReview: async ({
     mediaId,
     mediaType,
     mediaTitle,
@@ -15,7 +15,7 @@ const reviewApi = {
     content,
   }) => {
     try {
-      const response = await userClient.post(reviewEndpoints.create, {
+      const response = await userClient.post(reviewEndpoints.add, {
         mediaId,
         mediaType,
         mediaTitle,

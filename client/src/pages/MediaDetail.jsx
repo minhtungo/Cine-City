@@ -22,6 +22,9 @@ import favoriteApi from '../api/modules/favoriteApi';
 import { addFavorite, removeFavorite } from '../redux/features/userSlice';
 import MediaVideos from '../components/medias/MediaVideos';
 import Backdrops from '../components/medias/Backdrops';
+import Recommendation from './../components/medias/Recommendation';
+import Media from '../components/medias/Media';
+import MediaReview from '../components/medias/MediaReview';
 
 const MediaDetail = () => {
   const { mediaType, mediaId } = useParams();
@@ -253,6 +256,24 @@ const MediaDetail = () => {
             <Backdrops backdrops={media.images.backdrops} />
           </Container>
         )}
+
+        <MediaReview
+          reviews={media.reviews}
+          media={media}
+          mediaType={mediaType}
+        />
+
+        {/* Recommendations */}
+        <Container header='You may also like'>
+          {media?.recommendations.length > 0 ? (
+            <Recommendation medias={media.recommend} mediaType={mediaType} />
+          ) : (
+            <Media
+              mediaType={mediaType}
+              mediaCategory={tmdbConfigs.mediaCategory.top_rated}
+            />
+          )}
+        </Container>
       </Box>
     </>
   ) : (

@@ -8,7 +8,7 @@ const Video = ({ video }) => {
   const iframeRef = useRef(null);
 
   useEffect(() => {
-    const height = (iframeRef.current.offsetWidth * 9) / 16 + 'px';
+    const height = (iframeRef.current.offsetWidth * 9) / 18 + 'px';
     iframeRef.current.setAttribute('height', height);
   }, [video]);
 
@@ -21,6 +21,7 @@ const Video = ({ video }) => {
         width='100%'
         title={video.id}
         style={{ border: 0 }}
+        allowFullScreen={true}
       />
     </Box>
   );

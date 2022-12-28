@@ -7,11 +7,11 @@ const Backdrops = ({ backdrops }) => {
   return (
     <Box>
       <NavigationSwiper>
-        {[...backdrops].splice(0, 10).map((item, index) => (
-          <SwiperSlide key={index}>
+        {[...backdrops].splice(0, 10).map((item) => (
+          <SwiperSlide key={item.file_path}>
             <Box
               sx={{
-                paddingTop: '60%',
+                paddingTop: '50%',
                 backgroundPosition: 'top',
                 backgroundSize: 'cover',
                 backgroundImage: `url(${tmdbConfigs.backdropPath(
