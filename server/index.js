@@ -26,8 +26,8 @@ mongoose
     });
   })
   .catch((error) => {
-    console.log(error);
-    // res.status(500).send({ error: 'Error connecting to the database' });
+    console.error(error);
+    res.status(500).send({ error: 'Error connecting to the database' });
   });
 
 export default app;

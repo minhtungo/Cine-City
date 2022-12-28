@@ -1,6 +1,6 @@
 import { LoadingButton } from '@mui/lab';
 import { Box, Button, Stack, Typography } from '@mui/material';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import tmdbConfigs, { mediaCategories } from '../api/configs/tmdbConfigs';
@@ -23,7 +23,6 @@ const MediaList = () => {
   const [currPage, setCurrPage] = useState(1);
 
   const prevMediaType = usePrevious(mediaType);
-
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -40,9 +40,11 @@ const searchMedia = async (req, res) => {
     const { mediaType } = req.params;
     const { query, page } = req.query;
 
-    mediaType = mediaType === 'people' ? 'cast' : mediaType;
-
-    const response = await tmdbApi.searchMedia({ mediaType, query, page });
+    const response = await tmdbApi.mediaSearch({
+      mediaType: mediaType === 'people' ? 'person' : mediaType,
+      query,
+      page,
+    });
 
     responseHandler.successResponse(res, response);
   } catch {
