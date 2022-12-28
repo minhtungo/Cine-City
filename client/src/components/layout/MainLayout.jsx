@@ -23,7 +23,9 @@ const MainLayout = () => {
       if (error) dispatch(setUser(null));
     };
 
-    authUser();
+    if (user) {
+      authUser();
+    }
   }, [dispatch]);
 
   useEffect(() => {

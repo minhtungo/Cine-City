@@ -81,10 +81,10 @@ const Hero = ({ mediaType, mediaCategory }) => {
         loop={true}
         modules={[Autoplay]}
         style={{ width: '100%', height: 'max-content' }}
-        // autoplay={{
-        //   delay: 2000,
-        //   disableOnInteraction: false,
-        // }}
+        autoplay={{
+          delay: 4200,
+          disableOnInteraction: false,
+        }}
       >
         {[...movies].splice(0, 5).map((movie, index) => (
           <SwiperSlide key={movie.title}>
@@ -143,6 +143,7 @@ const Hero = ({ mediaType, mediaCategory }) => {
                     fontWeight='700'
                     sx={{
                       ...uiConfigs.style.typoLines(2, 'left'),
+                      color: 'primary.contrastText',
                     }}
                   >
                     {movie.title || movie.name}

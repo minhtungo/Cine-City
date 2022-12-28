@@ -114,6 +114,9 @@ const Header = () => {
             </Box>
             {/* user menu */}
             <Stack spacing={user ? 0.5 : 2} direction='row' alignItems='center'>
+              <IconButton component={Link} to='/search'>
+                <SearchOutlinedIcon />
+              </IconButton>
               <IconButton sx={{ color: 'inherit' }} onClick={switchTheme}>
                 {themeMode === themeModes.dark ? (
                   <DarkModeOutlinedIcon />

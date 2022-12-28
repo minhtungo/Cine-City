@@ -12,27 +12,28 @@ const themeConfigs = {
       mode === themeModes.dark
         ? {
             primary: {
-              main: '#ff0000',
-              contrastText: '#ffffff',
+              main: '#044f95',
+              contrastText: '#f2f2f2',
             },
             secondary: {
-              main: '#f44336',
-              contrastText: '#ffffff',
+              main: '#0563bb',
+              contrastText: '#e6e6e6',
             },
             background: {
               default: '#000000',
-              paper: '#131313',
+              paper: 'rgba(13, 13, 13, 0.9)',
             },
           }
         : {
             primary: {
-              main: '#ff0000',
+              main: '#0563bb',
             },
             secondary: {
-              main: '#f44336',
+              main: '#0563bb',
             },
             background: {
               default: colors.grey['100'],
+              paper: 'rgba(255, 255, 255,0.9)',
             },
           };
 

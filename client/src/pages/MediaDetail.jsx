@@ -212,7 +212,7 @@ const MediaDetail = () => {
                         marginRight: '0',
                       },
                     }}
-                    size='large'
+                    size='medium'
                     startIcon={
                       isFavorite ? (
                         <FavoriteIcon />
@@ -229,7 +229,7 @@ const MediaDetail = () => {
                     sx={{
                       width: 'max-content',
                     }}
-                    size='large'
+                    size='medium'
                     startIcon={<PlayArrowIcon />}
                     onClick={() => videoRef.current.scrollIntoView()}
                   >

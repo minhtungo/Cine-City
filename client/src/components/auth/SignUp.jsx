@@ -123,7 +123,7 @@ const SignUp = ({ switchAuthState }) => {
       <LoadingButton
         type='submit'
         fullWidth
-        size='large'
+        size='medium'
         variant='contained'
         sx={{ marginTop: 4 }}
         loading={isSignUpRequest}

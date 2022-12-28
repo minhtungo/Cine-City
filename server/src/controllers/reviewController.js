@@ -14,8 +14,8 @@ const createReview = async (req, res) => {
     await newReview.save();
 
     responseHandler.successResponse(res, {
-      ...review._doc,
-      id: review.id,
+      ...newReview._doc,
+      id: newReview.id,
       user: req.user,
     });
   } catch (error) {

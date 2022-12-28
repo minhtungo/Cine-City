@@ -17,6 +17,8 @@ import reviewApi from './../../api/modules/reviewApi';
 import DefaultAvatar from '../common/DefaultAvatar';
 import Container from './../common/Container';
 
+const SKIP = 5;
+
 const Review = ({ review, onRemove }) => {
   const { user } = useSelector((state) => state.user);
 
@@ -70,6 +72,7 @@ const Review = ({ review, onRemove }) => {
           {user && user.id === review.user.id && (
             <LoadingButton
               variant='outlined'
+              size='medium'
               startIcon={<DeleteIcon />}
               loadingPosition='start'
               loading={isLoading}
@@ -100,11 +103,9 @@ const MediaReview = ({ reviews, media, mediaType }) => {
   const [content, setContent] = useState('');
   const [reviewCount, setReviewCount] = useState(0);
 
-  const skip = 4;
-
   useEffect(() => {
     setReviewList([...reviews]);
-    setFilteredReviews([...reviews].slice(0, skip));
+    setFilteredReviews([...reviews].slice(0, SKIP));
     setReviewCount(reviews.length);
   }, [reviews]);
 
@@ -129,7 +130,7 @@ const MediaReview = ({ reviews, media, mediaType }) => {
       toast.success('Add review successfully');
       setContent('');
       //   setReviewList([response, ...reviewList]);
-      setFilteredReviews([response, ...reviewList].slice(0, skip));
+      setFilteredReviews([response, ...reviewList].slice(0, SKIP));
       setReviewCount(reviewCount + 1);
     }
   };
@@ -137,7 +138,7 @@ const MediaReview = ({ reviews, media, mediaType }) => {
   const onLoadMore = () => {
     setFilteredReviews([
       ...filteredReviews,
-      ...[...reviewList.splice](skip * page, skip),
+      ...[...reviewList].splice(SKIP * page, SKIP),
     ]);
     setPage(page + 1);
   };
@@ -148,7 +149,7 @@ const MediaReview = ({ reviews, media, mediaType }) => {
         (review) => review.id !== id
       );
       setReviewList(newReviewList);
-      setFilteredReviews([...newReviewList].splice(0, page * skip));
+      setFilteredReviews([...newReviewList].splice(0, page * SKIP));
     } else {
       setFilteredReviews(
         [...filteredReviews].filter((review) => review.id !== id)
@@ -162,7 +163,39 @@ const MediaReview = ({ reviews, media, mediaType }) => {
   return (
     <>
       <Container header={`Reviews (${reviewCount})`}>
-        <Stack spacing={4} marginBottom={2}>
+        {user && (
+          <>
+            <Stack direction='row' spacing={2}>
+              <DefaultAvatar text={user.displayName} />
+              <Stack spacing={2} flexGrow={1}>
+                <TextField
+                  value={content}
+                  multiline
+                  maxRows={10}
+                  placeholder='Write a review...'
+                  variant='outlined'
+                  onChange={(e) => setContent(e.target.value)}
+                />
+                <LoadingButton
+                  variant='contained'
+                  size='medium'
+                  sx={{
+                    width: 'max-content',
+                    alignSelf: 'flex-end',
+                  }}
+                  startIcon={<SendOutlinedIcon />}
+                  loadingPosition='start'
+                  loading={isLoading}
+                  onClick={onAddReview}
+                >
+                  Post
+                </LoadingButton>
+              </Stack>
+            </Stack>
+            <Divider />
+          </>
+        )}
+        <Stack spacing={4}>
           {filteredReviews.map((item) => (
             <Box key={item.id}>
               <Review review={item} onRemove={onRemove} />
@@ -177,38 +210,6 @@ const MediaReview = ({ reviews, media, mediaType }) => {
             <Button onClick={onLoadMore}>Load More</Button>
           )}
         </Stack>
-        {user && (
-          <>
-            <Divider />
-            <Stack direction='row' spacing={2}>
-              <DefaultAvatar text={user.displayName} />
-              <Stack spacing={2} flexGrow={1}>
-                <TextField
-                  value={content}
-                  multiline
-                  maxRows={10}
-                  placeholder='Write a review...'
-                  variant='outlined'
-                  onChange={(e) => setContent(e.target.value)}
-                />
-                <LoadingButton
-                  variant='contained'
-                  size='large'
-                  sx={{
-                    width: 'max-content',
-                    alignSelf: 'flex-end',
-                  }}
-                  startIcon={<SendOutlinedIcon />}
-                  loadingPosition='start'
-                  loading={isLoading}
-                  onClick={onAddReview}
-                >
-                  Post
-                </LoadingButton>
-              </Stack>
-            </Stack>
-          </>
-        )}
       </Container>
     </>
   );
