@@ -23,8 +23,9 @@ const DefaultAvatar = ({ text }) => {
     <Avatar
       sx={{
         backgroundColor: stringToColor(text),
-        width: 40,
-        height: 40,
+        width: 35,
+        height: 35,
+        marginLeft: '10px'
       }}
       children={`${text.split(' ')[0][0]}`}
     />

@@ -7,6 +7,7 @@ import {
   Stack,
   Toolbar,
   Typography,
+  Divider,
 } from '@mui/material';
 import useSwitchTheme from '../../hooks/useSwitchTheme';
 import { useSelector } from 'react-redux';
@@ -35,10 +36,8 @@ const Sidebar = ({ isOpened, toggleSidebar }) => {
           <Logo />
         </Stack>
       </Toolbar>
+      <Divider />
       <List sx={{ paddingX: '30px' }}>
-        <Typography variant='h6' marginBottom='20px'>
-          Menu
-        </Typography>
         {menuConfigs.main.map((item, index) => (
           <ListItemButton
             key={`${item.path}-${index}`}
@@ -57,7 +56,7 @@ const Sidebar = ({ isOpened, toggleSidebar }) => {
             <ListItemText
               disableTypography
               primary={
-                <Typography textTransform='uppercase' variant='body1'>
+                <Typography textTransform='capitalize' variant='body1'>
                   {item.label}
                 </Typography>
               }
@@ -67,9 +66,7 @@ const Sidebar = ({ isOpened, toggleSidebar }) => {
 
         {user && (
           <>
-            <Typography variant='h6' marginBottom='20px'>
-              Account
-            </Typography>
+            <Divider />
             {menuConfigs.user.map((item, index) => (
               <ListItemButton
                 key={item.path}
@@ -88,7 +85,7 @@ const Sidebar = ({ isOpened, toggleSidebar }) => {
                 <ListItemText
                   disableTypography
                   primary={
-                    <Typography textTransform='uppercase' variant='body1'>
+                    <Typography textTransform='capitalize' variant='body1'>
                       {item.label}
                     </Typography>
                   }
@@ -97,9 +94,7 @@ const Sidebar = ({ isOpened, toggleSidebar }) => {
             ))}
           </>
         )}
-        <Typography variant='h6' marginBottom='20px'>
-          Theme
-        </Typography>
+        <Divider />
         <ListItemButton onClick={switchTheme}>
           <ListItemIcon>
             {themeMode === themeModes.dark ? (
@@ -111,7 +106,7 @@ const Sidebar = ({ isOpened, toggleSidebar }) => {
           <ListItemText
             disableTypography
             primary={
-              <Typography textTransform='uppercase'>
+              <Typography textTransform='capitalize'>
                 {themeMode === themeModes.dark ? 'Dark Mode' : 'Light Mode'}
               </Typography>
             }

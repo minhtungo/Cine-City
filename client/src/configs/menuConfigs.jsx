@@ -41,19 +41,19 @@ const main = [
 
 const user = [
   {
-    label: 'favorites',
+    label: 'my favorites',
     path: '/favorites',
     icon: <FavoriteBorderOutlinedIcon />,
     state: 'favorite',
   },
   {
-    label: 'reviews',
+    label: 'my reviews',
     path: '/reviews',
     icon: <RateReviewOutlinedIcon />,
     state: 'reviews',
   },
   {
-    label: 'update password',
+    label: 'change password',
     path: '/update-password',
     icon: <LockResetOutlinedIcon />,
     state: 'passwordUpdate',

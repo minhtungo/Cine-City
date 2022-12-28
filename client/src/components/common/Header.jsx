@@ -10,6 +10,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { cloneElement, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { themeModes } from '../../configs/themeConfigs';
@@ -89,25 +90,30 @@ const Header = () => {
               <Box sx={{ marginRight: '30px' }}>
                 <Logo />
               </Box>
-              {menuConfigs.main.map((menu, index) => (
-                <Button
-                  key={`${menu.state}-${index}`}
-                  sx={{
-                    color: appState.includes(menu.state)
-                      ? 'primary.contrastText'
-                      : 'inherit',
-                    mr: 2,
-                  }}
-                  component={Link}
-                  to={menu.path}
-                  variant={appState.includes(menu.state) ? 'contained' : 'text'}
-                >
-                  {menu.label}
-                </Button>
-              ))}
+              {menuConfigs.main.map(
+                (menu, index) =>
+                  menu.label !== 'search' && (
+                    <Button
+                      key={`${menu.state}-${index}`}
+                      sx={{
+                        color: appState.includes(menu.state)
+                          ? 'primary.contrastText'
+                          : 'inherit',
+                        mr: 2,
+                      }}
+                      component={Link}
+                      to={menu.path}
+                      variant={
+                        appState.includes(menu.state) ? 'contained' : 'text'
+                      }
+                    >
+                      {menu.label}
+                    </Button>
+                  )
+              )}
             </Box>
             {/* user menu */}
-            <Stack spacing={2} direction='row' alignItems='center'>
+            <Stack spacing={user ? 0.5 : 2} direction='row' alignItems='center'>
               <IconButton sx={{ color: 'inherit' }} onClick={switchTheme}>
                 {themeMode === themeModes.dark ? (
                   <DarkModeOutlinedIcon />
@@ -120,11 +126,11 @@ const Header = () => {
                   variant='contained'
                   onClick={() => dispatch(setAuthModalOpen(true))}
                 >
-                  Login
+                  Log In
                 </Button>
               )}
+              {user && <UserMenu />}
             </Stack>
-            {user && <UserMenu />}
           </Toolbar>
         </AppBar>
       </ScrollAppBar>

@@ -7,16 +7,11 @@ import { setUser } from '../redux/features/userSlice';
 import userApi from './../api/modules/userApi';
 import uiConfigs from './../configs/uiConfigs';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import Container from './../components/common/Container';
 
 const UpdatePassword = () => {
   const [isLoading, setIsLoading] = useState(false);
-
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -29,6 +24,11 @@ const UpdatePassword = () => {
         .min(5, 'Password must be at least 5 characters')
         .required('Password is required'),
       newPassword: Yup.string()
+        .test(
+          '',
+          'New password must be different from current password',
+          (value) => value !== formik.values.currentPassword
+        )
         .min(5, 'New password must be at least 5 characters')
         .required('New password is required'),
       confirmNewPassword: Yup.string()
@@ -43,16 +43,13 @@ const UpdatePassword = () => {
     if (isLoading) return;
     setIsLoading(true);
     const { response, error } = await userApi.updatePassword(values);
-    setIsLoading(true);
+    setIsLoading(false);
 
     if (error) toast.error(error.message);
 
     if (response) {
       formik.resetForm();
-      navigate('/');
-      dispatch(setUser(null));
-      dispatch(setAuthModalOpen(true));
-      toast.success('Update password successfully');
+      toast.success('Change password successfully');
     }
   };
 
@@ -62,7 +59,7 @@ const UpdatePassword = () => {
         ...uiConfigs.style.mainContent,
       }}
     >
-      <Container header='Update Password'>
+      <Container header='Change Password'>
         <Box component='form' maxWidth='400px' onSubmit={formik.handleSubmit}>
           <Stack spacing={2}>
             <TextField

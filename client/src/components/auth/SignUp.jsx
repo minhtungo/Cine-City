@@ -46,7 +46,7 @@ const SignUp = ({ switchAuthState }) => {
         signUpForm.resetForm();
         dispatch(setUser(response));
         dispatch(setAuthModalOpen(false));
-        toast.success('Login successfully');
+        toast.success('Log In Successfully');
       }
       if (error) setErrorMessage(error.message);
     },
