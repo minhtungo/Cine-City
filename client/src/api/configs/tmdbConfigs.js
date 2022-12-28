@@ -8,6 +8,8 @@ const mediaCategory = {
   top_rated: 'top_rated',
 };
 
+export const mediaCategories = ['popular', 'top_rated'];
+
 const backdropPath = (imgEndpoint) =>
   `https://image.tmdb.org/t/p/original${imgEndpoint}`;
 

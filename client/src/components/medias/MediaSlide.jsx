@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import mediaApi from '../../api/modules/mediaApi';
 import MediaItem from './MediaItem';
 
-const Media = ({ mediaType, mediaCategory }) => {
+const MediaSlide = ({ mediaType, mediaCategory }) => {
   const [medias, setMedias] = useState([]);
 
   useEffect(() => {
@@ -33,4 +33,4 @@ const Media = ({ mediaType, mediaCategory }) => {
     </AutoSwiper>
   );
 };
-export default Media;
+export default MediaSlide;

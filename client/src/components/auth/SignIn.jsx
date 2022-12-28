@@ -48,7 +48,7 @@ const SignIn = ({ switchAuthState }) => {
       <Stack spacing={3}>
         <TextField
           type='text'
-          placeholder='username'
+          placeholder='Username'
           name='username'
           fullWidth
           value={signInForm.values.username}
@@ -63,7 +63,7 @@ const SignIn = ({ switchAuthState }) => {
 
         <TextField
           type='password'
-          placeholder='password'
+          placeholder='Password'
           name='password'
           fullWidth
           value={signInForm.values.password}

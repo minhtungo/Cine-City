@@ -23,7 +23,7 @@ import { addFavorite, removeFavorite } from '../redux/features/userSlice';
 import MediaVideos from '../components/medias/MediaVideos';
 import Backdrops from '../components/medias/Backdrops';
 import Recommendation from './../components/medias/Recommendation';
-import Media from '../components/medias/Media';
+import MediaSlide from '../components/medias/MediaSlide';
 import MediaReview from '../components/medias/MediaReview';
 
 const MediaDetail = () => {
@@ -40,6 +40,7 @@ const MediaDetail = () => {
   const videoRef = useRef(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const getMedia = async () => {
       dispatch(setGlobalLoading(true));
       const { response, error } = await mediaApi.getDetail({
@@ -268,7 +269,7 @@ const MediaDetail = () => {
           {media?.recommendations.length > 0 ? (
             <Recommendation medias={media.recommend} mediaType={mediaType} />
           ) : (
-            <Media
+            <MediaSlide
               mediaType={mediaType}
               mediaCategory={tmdbConfigs.mediaCategory.top_rated}
             />

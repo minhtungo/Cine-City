@@ -17,7 +17,7 @@ const main = [
     label: 'movies',
     path: '/movie',
     icon: <SlideshowOutlinedIcon />,
-    state: 'movies',
+    state: 'movie',
   },
   {
     label: 'tv shows',
