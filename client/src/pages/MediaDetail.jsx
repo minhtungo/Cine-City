@@ -201,7 +201,7 @@ const MediaDetail = () => {
                   {/* release and runtime */}
                   <Stack direction='row' spacing={1} alignItems='center'>
                     <Stack direction='row' spacing={0.5} alignItems='center'>
-                      <AccessTimeOutlinedIcon fontSize='small' />
+                      <EventAvailableOutlinedIcon fontSize='small' />
                       <Typography variant='body1'>
                         {media.release_date?.split('-')[0] ||
                           media.first_air_date?.split('-')[0]}
@@ -211,7 +211,7 @@ const MediaDetail = () => {
                     <Divider orientation='vertical' />
 
                     <Stack direction='row' spacing={0.5} alignItems='center'>
-                      <EventAvailableOutlinedIcon fontSize='small' />
+                      <AccessTimeOutlinedIcon fontSize='small' />
                       <Typography variant='body1'>
                         {time
                           .add(media.runtime || media.episode_run_time[0])
