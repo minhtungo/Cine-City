@@ -15,7 +15,6 @@ const castDetail = async (req, res) => {
 
 const castMedias = async (req, res) => {
   try {
-    console.log('hello');
     const { castId } = req.params;
     const medias = await tmdbApi.castMedias({ castId });
 

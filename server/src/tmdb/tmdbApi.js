@@ -32,6 +32,10 @@ const tmdbApi = {
     await axiosClient.fetchData(
       tmdbEndpoints.mediaSearch({ mediaType, query, page })
     ),
+  mediaMultiSearch: async ({ query, page }) =>
+    await axiosClient.fetchData(
+      tmdbEndpoints.mediaMultiSearch({ query, page })
+    ),
   castDetail: async ({ castId }) =>
     await axiosClient.fetchData(tmdbEndpoints.castDetail({ castId })),
   castMedias: async ({ castId }) =>

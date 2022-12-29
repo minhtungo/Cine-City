@@ -19,12 +19,10 @@ const MediaSearch = () => {
 
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q') || input;
-  const mediaType = searchParams.get('type') || 'movie';
 
   const searchMedia = useCallback(async () => {
     setIsLoading(true);
-    const { response, error } = await mediaApi.search({
-      mediaType,
+    const { response, error } = await mediaApi.mediaMultiSearch({
       query,
       page,
     });
@@ -61,10 +59,10 @@ const MediaSearch = () => {
               placeholder='Titles, people'
               sx={{ width: '100%' }}
               autoFocus
-              onChange={() => setInput(event.target.value)}
+              onChange={(event) => setInput(event.target.value)}
             />
           )}
-          <MediaGrid medias={medias} mediaType={mediaType} />
+          <MediaGrid medias={medias} mediaType='movie' />
           {medias.length > 0 && (
             <LoadingButton
               loading={isLoading}

@@ -52,6 +52,22 @@ const searchMedia = async (req, res) => {
   }
 };
 
+const searchMultiMedia = async (req, res) => {
+  try {
+    console.log('hj');
+    const { query, page } = req.query;
+
+    const response = await tmdbApi.mediaMultiSearch({
+      query,
+      page,
+    });
+
+    responseHandler.successResponse(res, response);
+  } catch {
+    responseHandler.errorResponse(res);
+  }
+};
+
 const getMediaDetail = async (req, res) => {
   try {
     const { mediaType, mediaId } = req.params;
@@ -97,4 +113,5 @@ export default {
   getMediaGenres,
   searchMedia,
   getMediaDetail,
+  searchMultiMedia,
 };

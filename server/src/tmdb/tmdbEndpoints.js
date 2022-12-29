@@ -16,6 +16,8 @@ const tmdbEndpoints = {
     tmdbConfig.getUrl(`${mediaType}/${mediaId}/images`),
   mediaSearch: ({ mediaType, query, page }) =>
     tmdbConfig.getUrl(`search/${mediaType}`, { query, page }),
+  mediaMultiSearch: ({ query, page }) =>
+    tmdbConfig.getUrl(`search/multi`, { query, page }),
   castDetail: ({ castId }) => tmdbConfig.getUrl(`person/${castId}`),
   castMedias: ({ castId }) =>
     tmdbConfig.getUrl(`person/${castId}/combined_credits`),

@@ -26,7 +26,7 @@ const SearchBar = ({ isNonSmallScreens }) => {
     const newQuery = e.target.value;
     setQuery(newQuery);
     if (newQuery.trim().length > 0) {
-      navigate(`/search/?type=movie&q=${newQuery}`);
+      navigate(`/search/?q=${newQuery}`);
     } else if (newQuery.trim().length === 0) {
       navigate(`${appState === 'home' ? '/' : appState}`);
     }

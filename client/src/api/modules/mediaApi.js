@@ -7,6 +7,8 @@ const mediaEndpoints = {
   detail: ({ mediaType, mediaId }) => `${mediaType}/detail/${mediaId}`,
   search: ({ mediaType, query, page }) =>
     `${mediaType}/search?query=${query}&page=${page}`,
+  mediaMultiSearch: ({ query, page }) =>
+    `search/multi?query=${query}&page=${page}`,
 };
 
 const mediaApi = {
@@ -42,10 +44,10 @@ const mediaApi = {
       return { error };
     }
   },
-  search: async ({ mediaType, query, page }) => {
+  mediaMultiSearch: async ({ query, page }) => {
     try {
       const response = await guestClient.get(
-        mediaEndpoints.search({ mediaType, query, page })
+        mediaEndpoints.mediaMultiSearch({ query, page })
       );
       return { response };
     } catch (error) {
