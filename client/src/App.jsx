@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import CssBaseline from '@mui/material/CssBaseline';
 import themeConfigs from './configs/themeConfigs';
-import routes from './routes/Routes';
+import routes from './routes/routes';
 import Wrapper from './components/common/Wrapper';
 import MainLayout from './components/layout/MainLayout';
 

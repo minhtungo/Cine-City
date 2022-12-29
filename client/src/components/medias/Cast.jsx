@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { routeEndpoints } from '../../routes/Routes';
+import { routeEndpoints } from '../../routes/routes';
 import uiConfigs from '../../configs/uiConfigs';
 import tmdbConfigs from '../../api/configs/tmdbConfigs';
 

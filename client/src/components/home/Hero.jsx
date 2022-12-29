@@ -22,7 +22,7 @@ import { setGlobalLoading } from '../../redux/features/globalLoadingSlice';
 import uiConfigs from '../../configs/uiConfigs';
 import tmdbConfigs from '../../api/configs/tmdbConfigs';
 import CircularBar from '../common/CircularBar';
-import { routeEndpoints } from '../../routes/Routes';
+import { routeEndpoints } from '../../routes/routes';
 
 const Hero = ({ mediaType, mediaCategory }) => {
   const theme = useTheme();
