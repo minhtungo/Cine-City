@@ -12,8 +12,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setUser } from '../../redux/features/userSlice';
-import menuConfigs from './../../configs/menuConfigs';
-import DefaultAvatar from './DefaultAvatar';
+import menuConfigs from '../../configs/menuConfigs';
+import DefaultAvatar from '../common/DefaultAvatar';
 
 const UserMenu = () => {
   const { user } = useSelector((state) => state.user);
@@ -52,7 +52,6 @@ const UserMenu = () => {
             >
               <DefaultAvatar text={user.displayName} />
               <Stack direction='column'>
-  
                 <Typography variant='body1' fontWeight='500'>
                   {user.displayName}
                 </Typography>

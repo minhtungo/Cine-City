@@ -11,17 +11,17 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { cloneElement, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { themeModes } from '../../configs/themeConfigs';
-import Logo from './Logo';
+import Logo from '../common/Logo';
 import menuConfigs from '../../configs/menuConfigs';
 import { Link } from 'react-router-dom';
 import UserMenu from './UserMenu';
 import Sidebar from './Sidebar';
 import useSwitchTheme from '../../hooks/useSwitchTheme';
 import { setAuthModalOpen } from '../../redux/features/authModalSlice';
+import SearchBar from './SearchBar';
 
 const ScrollAppBar = ({ children, window }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
@@ -115,11 +115,10 @@ const Header = () => {
                   )
               )}
             </Box>
+
             {/* user menu */}
             <Stack spacing={user ? 0.5 : 1} direction='row' alignItems='center'>
-              <IconButton component={Link} to='/search'>
-                <SearchOutlinedIcon />
-              </IconButton>
+              <SearchBar isNonSmallScreens={isNonSmallScreens} />
               {isNonSmallScreens && (
                 <IconButton sx={{ color: 'inherit' }} onClick={switchTheme}>
                   {themeMode === themeModes.dark ? (

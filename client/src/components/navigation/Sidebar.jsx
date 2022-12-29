@@ -15,10 +15,10 @@ import { Link } from 'react-router-dom';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 
-import uiConfigs from './../../configs/uiConfigs';
+import uiConfigs from '../../configs/uiConfigs';
 import { themeModes } from '../../configs/themeConfigs';
-import Logo from './Logo';
-import menuConfigs from './../../configs/menuConfigs';
+import Logo from '../common/Logo';
+import menuConfigs from '../../configs/menuConfigs';
 
 const Sidebar = ({ isOpened, toggleSidebar }) => {
   const switchTheme = useSwitchTheme();
@@ -86,7 +86,6 @@ const Sidebar = ({ isOpened, toggleSidebar }) => {
                   disableTypography
                   primary={
                     <Typography textTransform='capitalize' variant='body1'>
-                      {item.label === 'search' && item.icon}
                       {item.label}
                     </Typography>
                   }

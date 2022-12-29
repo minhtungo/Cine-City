@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import GlobalLoading from '../common/GlobalLoading';
 import { Outlet } from 'react-router-dom';
-import Header from '../common/Header';
+import Header from '../navigation/Header';
 import Footer from '../common/Footer';
 import AuthModal from './../common/AuthModal';
 import { useDispatch, useSelector } from 'react-redux';

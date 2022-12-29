@@ -33,7 +33,7 @@ const routes = [
   {
     path: '/search',
     element: <MediaSearch />,
-    state: 'search',
+    // state: 'search',
   },
   {
     path: '/update-password',

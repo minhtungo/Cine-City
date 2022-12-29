@@ -42,6 +42,16 @@ const mediaApi = {
       return { error };
     }
   },
+  search: async ({ mediaType, query, page }) => {
+    try {
+      const response = await guestClient.get(
+        mediaEndpoints.search({ mediaType, query, page })
+      );
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
 };
 
 export default mediaApi;

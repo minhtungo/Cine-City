@@ -31,12 +31,12 @@ const main = [
     icon: <FavoriteBorderOutlinedIcon />,
     state: 'favorites',
   },
-  {
-    label: 'search',
-    path: '/search',
-    icon: <SearchOutlinedIcon />,
-    state: 'search',
-  },
+  // {
+  //   label: 'search',
+  //   path: '/search',
+  //   icon: <SearchOutlinedIcon />,
+  //   // state: 'search',
+  // },
 ];
 
 const user = [

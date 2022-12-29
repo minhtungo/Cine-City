@@ -22,6 +22,7 @@ const themeConfigs = {
             background: {
               default: '#000000',
               paper: 'rgba(13, 13, 13, 0.9)',
+              input: 'rgba(26, 26, 26, 0.8)',
             },
           }
         : {
@@ -34,6 +35,7 @@ const themeConfigs = {
             background: {
               default: colors.grey['100'],
               paper: 'rgba(255, 255, 255,0.9)',
+              input: 'rgba(230, 230, 230, 0.8)',
             },
           };
 

@@ -186,7 +186,7 @@ const Hero = ({ mediaType, mediaCategory }) => {
                   {/* overview */}
                   <Typography
                     variant='body1'
-                    sx={{ ...uiConfigs.style.typoLines(3) }}
+                    sx={{ ...uiConfigs.style.typoLines(3, 'left') }}
                   >
                     {movie.overview}
                   </Typography>

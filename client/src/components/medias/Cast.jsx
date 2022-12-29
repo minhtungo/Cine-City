@@ -29,7 +29,8 @@ const Cast = ({ casts }) => {
                   paddingTop: '120%',
                   color: 'text.primary',
                   ...uiConfigs.style.backgroundImage(
-                    tmdbConfigs.posterPath(cast.profile_path)
+                    cast.profile_path &&
+                      tmdbConfigs.posterPath(cast.profile_path)
                   ),
                 }}
               >

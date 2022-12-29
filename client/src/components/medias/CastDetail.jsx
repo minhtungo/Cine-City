@@ -77,7 +77,7 @@ const CastDetail = () => {
                       ` - ${cast.deathday && cast.deathday.split('-')[0]}`}
                     {')'}
                   </Typography>
-                  <Typography sx={{ ...uiConfigs.style.typoLines(10) }}>
+                  <Typography sx={{ ...uiConfigs.style.typoLines(20, 'left') }}>
                     {cast.biography}
                   </Typography>
                 </Stack>
