@@ -54,7 +54,7 @@ const user = [
   },
   {
     label: 'change password',
-    path: '/update-password',
+    path: '/change-password',
     icon: <LockResetOutlinedIcon />,
     state: 'passwordUpdate',
   },

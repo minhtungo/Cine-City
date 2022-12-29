@@ -5,7 +5,7 @@ const userEndpoints = {
   login: 'user/login',
   signup: 'user/signup',
   getUserInfo: 'user/info',
-  updatePassword: 'user/update-password',
+  changePassword: 'user/change-password',
   getFavorites: 'user/favorites',
   addFavorite: 'user/favorites',
 };
@@ -43,13 +43,13 @@ const userApi = {
       return { error };
     }
   },
-  updatePassword: async ({
+  changePassword: async ({
     currentPassword,
     newPassword,
     confirmNewPassword,
   }) => {
     try {
-      const response = await userClient.put(userEndpoints.updatePassword, {
+      const response = await userClient.put(userEndpoints.changePassword, {
         currentPassword,
         newPassword,
         confirmNewPassword,

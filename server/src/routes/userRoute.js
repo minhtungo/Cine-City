@@ -63,7 +63,7 @@ router.post(
 );
 
 router.put(
-  '/update-password',
+  '/change-password',
   tokenMiddleware.auth,
   body('currentPassword')
     .exists()
@@ -87,7 +87,7 @@ router.put(
       return true;
     }),
   requestHandler.validate,
-  userControllers.updatePassword
+  userControllers.changePassword
 );
 
 router.get('/info', tokenMiddleware.auth, userControllers.getUserInfo);

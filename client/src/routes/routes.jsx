@@ -2,7 +2,7 @@ import Home from '../pages/Home';
 import MediaSearch from '../pages/MediaSearch';
 import MediaList from '../pages/MediaList';
 import ProtectedPage from '../components/common/ProtectedPage';
-import UpdatePassword from '../pages/UpdatePassword';
+import UpdatePassword from '../pages/ChangePassword';
 import FavoriteList from '../pages/FavoriteList';
 import ReviewList from '../pages/ReviewList';
 import MediaDetail from '../pages/MediaDetail';
@@ -16,7 +16,7 @@ export const routeEndpoints = {
   cast: (id) => `/cast/${id}`,
   favoriteList: '/favorites',
   reviewList: '/reviews',
-  updatePassword: '/update-password',
+  changePassword: '/change-password',
 };
 
 const routes = [
@@ -36,13 +36,13 @@ const routes = [
     // state: 'search',
   },
   {
-    path: '/update-password',
+    path: '/change-password',
     element: (
       <ProtectedPage>
         <UpdatePassword />
       </ProtectedPage>
     ),
-    state: 'updatePassword',
+    state: 'changePassword',
   },
   {
     path: '/favorites',

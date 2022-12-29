@@ -72,7 +72,7 @@ const login = async (req, res) => {
   }
 };
 
-const updatePassword = async (req, res) => {
+const changePassword = async (req, res) => {
   try {
     const { currentPassword, newPassword } = req.body;
 
@@ -111,6 +111,6 @@ const getUserInfo = async (req, res) => {
 export default {
   signup,
   login,
-  updatePassword,
+  changePassword,
   getUserInfo,
 };
