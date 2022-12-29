@@ -86,6 +86,7 @@ const Sidebar = ({ isOpened, toggleSidebar }) => {
                   disableTypography
                   primary={
                     <Typography textTransform='capitalize' variant='body1'>
+                      {item.label === 'search' && item.icon}
                       {item.label}
                     </Typography>
                   }

@@ -1,9 +1,19 @@
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
+import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
 
 import { LoadingButton } from '@mui/lab';
-import { Box, Button, Chip, Divider, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Chip,
+  Divider,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from '@mui/material';
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -26,9 +36,13 @@ import Recommendation from './../components/medias/Recommendation';
 import MediaSlide from '../components/medias/MediaSlide';
 import MediaReview from '../components/medias/MediaReview';
 
+import dayjs from 'dayjs';
+
 const MediaDetail = () => {
   const { mediaType, mediaId } = useParams();
   const { user, favoriteList } = useSelector((state) => state.user);
+
+  const isNonSmallScreens = useMediaQuery('(min-width: 400px)');
 
   const [media, setMedia] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -38,6 +52,8 @@ const MediaDetail = () => {
   const dispatch = useDispatch();
 
   const videoRef = useRef(null);
+
+  const time = dayjs();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -128,13 +144,13 @@ const MediaDetail = () => {
           ...uiConfigs.style.mainContent,
         }}
       >
+        {/* content */}
         <Box
           sx={{
             marginTop: {
               xs: '-10rem',
               md: '-15rem',
               lg: '-20rem',
-              xl: '-25rem',
             },
           }}
         >
@@ -144,9 +160,10 @@ const MediaDetail = () => {
               flexDirection: { md: 'row', xs: 'column' },
             }}
           >
+            {/* poster */}
             <Box
               sx={{
-                width: { xs: '70%', sm: '50%', md: '40%' },
+                width: { xs: '70%', sm: '50%', md: '32%', xxl: '40%' },
                 margin: { xs: '0 auto 2rem', md: '0 2rem 0 0' },
               }}
             >
@@ -154,45 +171,79 @@ const MediaDetail = () => {
                 sx={{
                   paddingTop: '140%',
                   ...uiConfigs.style.backgroundImage(
-                    tmdbConfigs.posterPath(media.poster_path) ||
-                      media.backdrop_path
+                    tmdbConfigs.posterPath(
+                      media.poster_path || media.backdrop_path
+                    )
                   ),
                 }}
               />
             </Box>
+            {/* poster */}
+
             {/* Info */}
             <Box
               sx={{
-                width: { xs: '70%', md: '60%' },
+                width: { xs: '100%', md: '60%' },
                 color: 'text.primary',
               }}
             >
-              <Stack spacing={5}>
+              <Stack spacing={3}>
                 {/* title */}
-                <Typography
-                  variant='h4'
-                  fontSize={{ xs: '2rem', md: '2rem', lg: '4rem' }}
-                  fontWeight='700'
-                  sx={{ ...uiConfigs.style.typoLines(2, 'left') }}
-                >
-                  {`${media.title || media.name} ${
-                    mediaType === tmdbConfigs.mediaType.movie
-                      ? media.release_date.split('-')[0]
-                      : media.first_air_date.split('-')[0]
-                  }`}
-                </Typography>
+                <Stack spacing={1}>
+                  <Typography
+                    variant='h4'
+                    fontSize={{ xs: '1.4rem', md: '1.8rem', lg: '2.4rem' }}
+                    fontWeight='700'
+                    sx={{ ...uiConfigs.style.typoLines(3, 'left') }}
+                  >
+                    {media.title || media.name}
+                  </Typography>
+                  {/* release and runtime */}
+                  <Stack direction='row' spacing={1} alignItems='center'>
+                    <Stack direction='row' spacing={0.5} alignItems='center'>
+                      <AccessTimeOutlinedIcon fontSize='small' />
+                      <Typography variant='body1'>
+                        {media.release_date?.split('-')[0] ||
+                          media.first_air_date?.split('-')[0]}
+                      </Typography>
+                    </Stack>
+
+                    <Divider orientation='vertical' />
+
+                    <Stack direction='row' spacing={0.5} alignItems='center'>
+                      <EventAvailableOutlinedIcon fontSize='small' />
+                      <Typography variant='body1'>
+                        {time
+                          .add(media.runtime || media.episode_run_time[0])
+                          .format('h[h]mm[m]')}
+                      </Typography>
+                    </Stack>
+                  </Stack>
+                </Stack>
+
                 {/* rates and genres */}
                 <Stack direction='row' spacing={1} alignItems='center'>
                   <CircularBar value={media.vote_average} />
                   <Divider orientation='vertical' />
-                  {genres.map((genre, index) => (
-                    <Chip
-                      label={genre.name}
-                      variant='filled'
-                      color='primary'
-                      key={`${genre.id}-${index}`}
-                    />
-                  ))}
+                  {isNonSmallScreens
+                    ? genres.map((genre, index) => (
+                        <Chip
+                          label={genre.name}
+                          variant='filled'
+                          color='primary'
+                          key={`${genre.id}-${index}`}
+                        />
+                      ))
+                    : [...genres]
+                        .splice(0, 2)
+                        .map((genre, index) => (
+                          <Chip
+                            label={genre.name}
+                            variant='filled'
+                            color='primary'
+                            key={`${genre.id}-${index}`}
+                          />
+                        ))}
                 </Stack>
                 {/* overview */}
                 <Typography

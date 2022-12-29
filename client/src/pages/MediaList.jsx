@@ -9,7 +9,7 @@ import { setAppState } from '../redux/features/appStateSlice';
 import { toast } from 'react-toastify';
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice';
 import mediaApi from './../api/modules/mediaApi';
-import Hero from './../components/Hero';
+import Hero from './../components/home/Hero';
 import uiConfigs from './../configs/uiConfigs';
 import usePrevious from './../hooks/usePrevious';
 import MediaGrid from './../components/medias/MediaGrid';

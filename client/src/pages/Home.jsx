@@ -1,9 +1,9 @@
-import Hero from './../components/Hero';
 import tmdbConfigs from '../api/configs/tmdbConfigs';
 import uiConfigs from '../configs/uiConfigs';
 import Container from './../components/common/Container';
 import { Box } from '@mui/material';
 import MediaSlide from '../components/medias/MediaSlide';
+import Hero from './../components/home/Hero';
 
 const Home = () => {
   return (

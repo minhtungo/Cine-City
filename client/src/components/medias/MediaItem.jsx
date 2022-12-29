@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import tmdbConfigs from '../../api/configs/tmdbConfigs';
-import { routeEndpoints } from '../../routes/routes';
+import { routeEndpoints } from '../../routes/Routes';
 import uiConfigs from '../../configs/uiConfigs';
 import favoriteUtils from '../../utils/favoriteUtils';
 import CircularBar from '../common/CircularBar';

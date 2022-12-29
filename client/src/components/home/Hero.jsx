@@ -7,6 +7,7 @@ import {
   Stack,
   Typography,
   useTheme,
+  useMediaQuery,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -15,13 +16,13 @@ import { Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { toast } from 'react-toastify';
 
-import genreApi from '../api/modules/genreApi';
-import mediaApi from '../api/modules/mediaApi';
-import { setGlobalLoading } from '../redux/features/globalLoadingSlice';
-import uiConfigs from './../configs/uiConfigs';
-import tmdbConfigs from './../api/configs/tmdbConfigs';
-import CircularBar from './common/CircularBar';
-import { routeEndpoints } from '../routes/routes';
+import genreApi from '../../api/modules/genreApi';
+import mediaApi from '../../api/modules/mediaApi';
+import { setGlobalLoading } from '../../redux/features/globalLoadingSlice';
+import uiConfigs from '../../configs/uiConfigs';
+import tmdbConfigs from '../../api/configs/tmdbConfigs';
+import CircularBar from '../common/CircularBar';
+import { routeEndpoints } from '../../routes/Routes';
 
 const Hero = ({ mediaType, mediaCategory }) => {
   const theme = useTheme();
@@ -29,6 +30,8 @@ const Hero = ({ mediaType, mediaCategory }) => {
 
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
+
+  const isNonSmallScreens = useMediaQuery('(min-width: 450px)');
 
   useEffect(() => {
     const getMedias = async () => {
@@ -87,7 +90,7 @@ const Hero = ({ mediaType, mediaCategory }) => {
         }}
       >
         {[...movies].splice(0, 5).map((movie, index) => (
-          <SwiperSlide key={movie.title}>
+          <SwiperSlide key={`${index}-${movie.title}`}>
             <Box
               sx={{
                 paddingTop: {
@@ -139,10 +142,10 @@ const Hero = ({ mediaType, mediaCategory }) => {
                   {/* title */}
                   <Typography
                     variant='h4'
-                    fontSize={{ xs: '2rem', md: '2rem', lg: '4rem' }}
+                    fontSize={{ xs: '1.6rem', md: '2rem', lg: '3rem' }}
                     fontWeight='700'
                     sx={{
-                      ...uiConfigs.style.typoLines(2, 'left'),
+                      ...uiConfigs.style.typoLines(3, 'left'),
                       color: 'primary.contrastText',
                     }}
                   >
@@ -154,17 +157,31 @@ const Hero = ({ mediaType, mediaCategory }) => {
                     <CircularBar value={movie.vote_average} />
                     {/* genres */}
                     <Divider orientation='vertical' />
-                    {[...movie.genre_ids].map((genreId, index) => (
-                      <Chip
-                        variant='filled'
-                        color='primary'
-                        key={`${movie.id}-${genreId}-${index}`}
-                        label={
-                          genres.find((e) => e.id === genreId) &&
-                          genres.find((e) => e.id === genreId).name
-                        }
-                      />
-                    ))}
+                    {isNonSmallScreens
+                      ? [...movie.genre_ids].map((genreId, index) => (
+                          <Chip
+                            variant='filled'
+                            color='primary'
+                            key={`${movie.id}-${genreId}-${index}`}
+                            label={
+                              genres.find((e) => e.id === genreId) &&
+                              genres.find((e) => e.id === genreId).name
+                            }
+                          />
+                        ))
+                      : [...movie.genre_ids]
+                          .splice(0, 2)
+                          .map((genreId, index) => (
+                            <Chip
+                              variant='filled'
+                              color='primary'
+                              key={`${movie.id}-${genreId}-${index}`}
+                              label={
+                                genres.find((e) => e.id === genreId) &&
+                                genres.find((e) => e.id === genreId).name
+                              }
+                            />
+                          ))}
                   </Stack>
                   {/* overview */}
                   <Typography

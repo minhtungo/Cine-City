@@ -6,6 +6,7 @@ import {
   IconButton,
   Stack,
   Box,
+  useMediaQuery,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
@@ -52,6 +53,8 @@ const Header = () => {
   const { appState } = useSelector((state) => state.appState);
   const { themeMode } = useSelector((state) => state.themeMode);
 
+  const isNonSmallScreens = useMediaQuery('(min-width: 450px)');
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const dispatch = useDispatch();
@@ -72,7 +75,7 @@ const Header = () => {
             <Stack direction='row' spacing={1} alignItems='center'>
               <IconButton
                 color='inherit'
-                sx={{ mr: 2, display: { md: 'none' } }}
+                sx={{ mr: 1, display: { md: 'none' }, padding: 0 }}
                 onClick={toggleSidebar}
               >
                 <MenuIcon />
@@ -113,21 +116,25 @@ const Header = () => {
               )}
             </Box>
             {/* user menu */}
-            <Stack spacing={user ? 0.5 : 2} direction='row' alignItems='center'>
+            <Stack spacing={user ? 0.5 : 1} direction='row' alignItems='center'>
               <IconButton component={Link} to='/search'>
                 <SearchOutlinedIcon />
               </IconButton>
-              <IconButton sx={{ color: 'inherit' }} onClick={switchTheme}>
-                {themeMode === themeModes.dark ? (
-                  <DarkModeOutlinedIcon />
-                ) : (
-                  <WbSunnyOutlinedIcon />
-                )}
-              </IconButton>
+              {isNonSmallScreens && (
+                <IconButton sx={{ color: 'inherit' }} onClick={switchTheme}>
+                  {themeMode === themeModes.dark ? (
+                    <DarkModeOutlinedIcon />
+                  ) : (
+                    <WbSunnyOutlinedIcon />
+                  )}
+                </IconButton>
+              )}
+
               {!user && (
                 <Button
                   variant='contained'
                   onClick={() => dispatch(setAuthModalOpen(true))}
+                  size={isNonSmallScreens ? 'medium' : 'small'}
                 >
                   Log In
                 </Button>

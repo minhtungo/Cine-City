@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import reviewApi from './../api/modules/reviewApi';
-import { routeEndpoints } from './../routes/routes';
+import { routeEndpoints } from '../routes/Routes';
 import uiConfigs from './../configs/uiConfigs';
 import tmdbConfigs from './../api/configs/tmdbConfigs';
 import Container from '../components/common/Container';
