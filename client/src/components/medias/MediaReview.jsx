@@ -14,7 +14,7 @@ import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
 import reviewApi from './../../api/modules/reviewApi';
-import DefaultAvatar from '../common/DefaultAvatar';
+import UserAvatar from '../common/UserAvatar';
 import Container from './../common/Container';
 
 const SKIP = 5;
@@ -49,7 +49,7 @@ const Review = ({ review, onRemove }) => {
     >
       <Stack direction='row' spacing={2}>
         {/* Avatar */}
-        <DefaultAvatar text={review.user.displayName} />
+        <UserAvatar text={review.user.displayName} />
         <Stack spacing={2} flexGrow={1}>
           <Stack
             spacing={1}
@@ -166,7 +166,7 @@ const MediaReview = ({ reviews, media, mediaType }) => {
         {user && (
           <>
             <Stack direction='row' spacing={2}>
-              <DefaultAvatar text={user.displayName} />
+              <UserAvatar text={user.displayName} />
               <Stack spacing={2} flexGrow={1}>
                 <TextField
                   value={content}

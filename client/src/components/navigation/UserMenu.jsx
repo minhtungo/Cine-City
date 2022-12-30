@@ -1,4 +1,5 @@
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 import {
   ListItemButton,
   ListItemIcon,
@@ -13,10 +14,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setUser } from '../../redux/features/userSlice';
 import menuConfigs from '../../configs/menuConfigs';
-import DefaultAvatar from '../common/DefaultAvatar';
+import UserAvatar from '../common/UserAvatar';
+import ChangeAvatar from '../ChangeAvatar';
 
 const UserMenu = () => {
   const { user } = useSelector((state) => state.user);
+  const [isChangeAvatar, setIsChangeAvatar] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -26,6 +29,10 @@ const UserMenu = () => {
 
   return (
     <>
+      <ChangeAvatar
+        isChangeAvatar={isChangeAvatar}
+        setIsChangeAvatar={setIsChangeAvatar}
+      />
       {user && (
         <>
           <Typography
@@ -36,7 +43,7 @@ const UserMenu = () => {
             }}
             onClick={toggleMenu}
           >
-            <DefaultAvatar text={user.displayName} />
+            <UserAvatar text={user.displayName} />
           </Typography>
           <Menu
             open={Boolean(anchorEl)}
@@ -50,7 +57,7 @@ const UserMenu = () => {
               alignItems='center'
               sx={{ paddingBottom: '10px' }}
             >
-              <DefaultAvatar text={user.displayName} />
+              <UserAvatar text={user.displayName} />
               <Stack direction='column'>
                 <Typography variant='body1' fontWeight='500'>
                   {user.displayName}
@@ -79,11 +86,21 @@ const UserMenu = () => {
                 />
               </ListItemButton>
             ))}
+            <ListItemButton onClick={() => setIsChangeAvatar(true)}>
+              <ListItemIcon>
+                <AccountBoxOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText
+                disableTypography
+                primary={
+                  <Typography textTransform='capitalize'>
+                    Change Avatar
+                  </Typography>
+                }
+              />
+            </ListItemButton>
             <Divider />
-            <ListItemButton
-              sx={{ borderRadius: '10px' }}
-              onClick={() => dispatch(setUser(null))}
-            >
+            <ListItemButton onClick={() => dispatch(setUser(null))}>
               <ListItemIcon>
                 <LogoutOutlinedIcon />
               </ListItemIcon>

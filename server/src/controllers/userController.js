@@ -7,7 +7,9 @@ const signup = async (req, res) => {
   try {
     const { username, password, displayName } = req.body;
 
-    const user = await userModel.findOne({ username });
+    const user = await userModel
+      .findOne({ username })
+      .select('username id displayName avatar');
 
     if (user)
       return responseHandler.badRequestResponse(res, 'User already exists');
@@ -42,7 +44,7 @@ const login = async (req, res) => {
 
     const user = await userModel
       .findOne({ username })
-      .select('username password salt id displayName');
+      .select('username password salt id displayName avatar');
 
     if (!user)
       return responseHandler.badRequestResponse(
@@ -88,6 +90,9 @@ const changePassword = async (req, res) => {
 
     await user.save();
 
+    user.password = undefined;
+    user.salt = undefined;
+
     responseHandler.successResponse(res, {
       message: 'Password updated successfully',
     });
@@ -98,7 +103,9 @@ const changePassword = async (req, res) => {
 
 const getUserInfo = async (req, res) => {
   try {
-    const user = await userModel.findById(req.user.id);
+    const user = await userModel
+      .findById(req.user.id)
+      .select('username id displayName avatar');
 
     if (!user) return responseHandler.notFoundResponse(res);
 
@@ -111,14 +118,14 @@ const getUserInfo = async (req, res) => {
 const changeAvatar = async (req, res) => {
   try {
     const { avatarUrl } = req.body;
-    const user = await userModel.findByIdAndUpdate(
-      req.user.id,
-      {
-        $set: { avatar: avatarUrl },
-      },
-      { new: true }
-    );
+    const user = await userModel
+      .findById(req.user.id)
+      .select('username id displayName avatar');
+
     if (!user) return responseHandler.notFoundResponse(res);
+
+    user.setAvatar(avatarUrl);
+    await user.save();
 
     responseHandler.successResponse(res, user);
   } catch (error) {

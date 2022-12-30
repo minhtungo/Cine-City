@@ -1,6 +1,9 @@
 import { Avatar } from '@mui/material';
+import { useSelector } from 'react-redux';
 
-const DefaultAvatar = ({ text }) => {
+const UserAvatar = ({ text }) => {
+  const { user } = useSelector((state) => state.user);
+
   const stringToColor = (str) => {
     let hash = 0;
     let i;
@@ -21,15 +24,16 @@ const DefaultAvatar = ({ text }) => {
 
   return (
     <Avatar
+      src={user.avatar !== '' ? user.avatar : null}
       sx={{
-        backgroundColor: stringToColor(text),
+        backgroundColor: user.avatar === '' && stringToColor,
         width: 35,
         height: 35,
-        marginLeft: '10px'
+        marginLeft: '10px',
       }}
       children={`${text.split(' ')[0][0]}`}
     />
   );
 };
 
-export default DefaultAvatar;
+export default UserAvatar;

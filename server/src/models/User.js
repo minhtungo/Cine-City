@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
+      default: '',
     },
   },
   modelOptions
@@ -38,6 +39,10 @@ userSchema.methods.setPassword = function (password) {
   this.password = crypto
     .pbkdf2Sync(password, this.salt, 10000, 512, 'sha512')
     .toString('hex');
+};
+
+userSchema.methods.setAvatar = function (avatarUrl) {
+  this.avatar = avatarUrl;
 };
 
 // check whether a given password is correct for a user.

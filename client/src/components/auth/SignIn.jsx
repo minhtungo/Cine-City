@@ -36,6 +36,7 @@ const SignIn = ({ switchAuthState }) => {
       if (response) {
         signInForm.resetForm();
         dispatch(setUser(response));
+
         dispatch(setAuthModalOpen(false));
         toast.success('Login successfully');
       }

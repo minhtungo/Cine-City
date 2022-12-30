@@ -3,12 +3,12 @@ import { initializeApp } from 'firebase/app';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAw-3VnPvnHlI93wMn4KxsnIyHyMajBleU',
-  authDomain: 'cine-city-73b00.firebaseapp.com',
-  projectId: 'cine-city-73b00',
-  storageBucket: 'cine-city-73b00.appspot.com',
-  messagingSenderId: '222028614883',
-  appId: '1:222028614883:web:e9f6457d05d6c00daa09d6',
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);

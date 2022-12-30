@@ -92,7 +92,7 @@ router.put(
 
 router.get('/info', tokenMiddleware.auth, userControllers.getUserInfo);
 
-router.post(
+router.put(
   '/change-avatar',
   tokenMiddleware.auth,
   userControllers.changeAvatar

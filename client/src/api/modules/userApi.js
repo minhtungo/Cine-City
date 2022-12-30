@@ -6,6 +6,7 @@ const userEndpoints = {
   signup: 'user/signup',
   getUserInfo: 'user/info',
   changePassword: 'user/change-password',
+  changeAvatar: 'user/change-avatar',
   getFavorites: 'user/favorites',
   addFavorite: 'user/favorites',
 };
@@ -53,6 +54,16 @@ const userApi = {
         currentPassword,
         newPassword,
         confirmNewPassword,
+      });
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+  changeAvatar: async (avatarUrl) => {
+    try {
+      const response = await userClient.put(userEndpoints.changeAvatar, {
+        avatarUrl,
       });
       return { response };
     } catch (error) {
