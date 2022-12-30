@@ -1,10 +1,10 @@
 import userModel from '../models/User.js';
 import jsonwebtoken from 'jsonwebtoken';
 import responseHandler from '../handlers/responseHandler.js';
+import multer from 'multer';
 
 const signup = async (req, res) => {
   try {
-    res.send('hello');
     const { username, password, displayName } = req.body;
 
     const user = await userModel.findOne({ username });
@@ -31,7 +31,7 @@ const signup = async (req, res) => {
       ...newUser._doc,
       id: newUser.id,
     });
-  } catch (err) {
+  } catch (error) {
     responseHandler.errorResponse(res);
   }
 };
@@ -108,9 +108,28 @@ const getUserInfo = async (req, res) => {
   }
 };
 
+const changeAvatar = async (req, res) => {
+  try {
+    const { avatarUrl } = req.body;
+    const user = await userModel.findByIdAndUpdate(
+      req.user.id,
+      {
+        $set: { avatar: avatarUrl },
+      },
+      { new: true }
+    );
+    if (!user) return responseHandler.notFoundResponse(res);
+
+    responseHandler.successResponse(res, user);
+  } catch (error) {
+    responseHandler.errorResponse(res);
+  }
+};
+
 export default {
   signup,
   login,
   changePassword,
   getUserInfo,
+  changeAvatar,
 };

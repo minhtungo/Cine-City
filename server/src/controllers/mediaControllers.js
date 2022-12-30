@@ -54,7 +54,6 @@ const searchMedia = async (req, res) => {
 
 const searchMultiMedia = async (req, res) => {
   try {
-    console.log('hj');
     const { query, page } = req.query;
 
     const response = await tmdbApi.mediaMultiSearch({

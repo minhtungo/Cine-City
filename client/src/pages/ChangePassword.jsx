@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { useState } from 'react';
 import Container from '../components/common/Container';
 import Title from '../components/common/Title';
+import ChangeAvatar from '../components/ChangeAvatar';
 
 const UpdatePassword = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -137,6 +138,7 @@ const UpdatePassword = () => {
           </Stack>
         </Box>
       </Container>
+     
     </Box>
   );
 };

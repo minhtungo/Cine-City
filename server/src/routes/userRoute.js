@@ -92,6 +92,12 @@ router.put(
 
 router.get('/info', tokenMiddleware.auth, userControllers.getUserInfo);
 
+router.post(
+  '/change-avatar',
+  tokenMiddleware.auth,
+  userControllers.changeAvatar
+);
+
 router.get(
   '/favorites',
   tokenMiddleware.auth,
