@@ -26,12 +26,13 @@ const ChangeAvatar = ({ isChangeAvatar, setIsChangeAvatar }) => {
     e.preventDefault();
 
     try {
-      if (isLoading) return;
       if (avatar) {
         setIsLoading(true);
+        console.log(avatar);
         const avatarRef = ref(storage, `avatars/${avatar.name}`);
         await uploadBytes(avatarRef, avatar);
         const avatarUrl = await getDownloadURL(avatarRef);
+        console.log(avatarUrl);
 
         const { response, error } = await userApi.changeAvatar(avatarUrl);
 
