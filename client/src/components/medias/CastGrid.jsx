@@ -16,7 +16,10 @@ const CastGrid = ({ castId }) => {
     const getMedias = async () => {
       const { response, error } = await castApi.medias({ castId });
 
-      if (error) toast.error('Network error. Please try again.');
+      if (error){
+        console.error(error);
+        toast.error('Network error. Please try again.');
+      } 
 
       if (response) {
         const sortedMedias = response.cast.sort(

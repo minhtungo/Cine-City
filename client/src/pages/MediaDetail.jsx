@@ -71,7 +71,10 @@ const MediaDetail = () => {
         setIsFavorite(response.isFavorite);
       }
 
-      if (error) toast.error('Network error. Please try again.');
+      if (error) {
+        console.error(error);
+        toast.error('Network error. Please try again.');
+      }
     };
 
     getMedia();
@@ -101,7 +104,10 @@ const MediaDetail = () => {
 
     setIsLoading(false);
 
-    if (error) toast.error(error.message);
+    if (error) {
+      console.error(error);
+      toast.error('Network error. Please try again.');
+    }
     if (response) {
       dispatch(addFavorite(response));
       setIsFavorite(true);
@@ -122,7 +128,10 @@ const MediaDetail = () => {
     });
     setIsLoading(false);
 
-    if (error) toast.error('Network error. Please try again.');
+    if (error) {
+      console.error(error);
+      toast.error('Network error. Please try again.');
+    }
 
     if (response) {
       dispatch(removeFavorite(favorite));

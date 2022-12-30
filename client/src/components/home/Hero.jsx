@@ -43,7 +43,10 @@ const Hero = ({ mediaType, mediaCategory }) => {
 
       if (response) setMovies(response.results);
       // if (error) toast.error(error.message);
-      if (error) toast.error('Network error. Please try again.');
+      if (error) {
+        console.error(error);
+        toast.error('Network error. Please try again.');
+      }
       dispatch(setGlobalLoading(false));
     };
     const getGenres = async () => {
@@ -55,6 +58,7 @@ const Hero = ({ mediaType, mediaCategory }) => {
       }
       if (error) {
         // toast.error(error.message);
+        console.error(error);
         toast.error('Network error. Please try again.');
         setGlobalLoading(false);
       }

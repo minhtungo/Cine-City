@@ -20,7 +20,10 @@ const MainLayout = () => {
       const { response, error } = await userApi.getUserInfo();
 
       if (response) dispatch(setUser(response));
-      if (error) dispatch(setUser(null));
+      if (error) {
+        console.error(error);
+        dispatch(setUser(null));
+      }
     };
 
     if (localStorage.getItem('token')) {
@@ -34,7 +37,10 @@ const MainLayout = () => {
 
       if (response) dispatch(setFavoriteList(response));
       // if (error) toast.error(error.message);
-      toast.error('Network error. Please try again.');
+      if (error) {
+        console.error(error);
+        toast.error('Network error. Please try again.');
+      }
     };
 
     if (user) getFavorites();

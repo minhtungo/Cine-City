@@ -44,7 +44,10 @@ const UpdatePassword = () => {
     const { response, error } = await userApi.changePassword(values);
     setIsLoading(false);
 
-    if (error) toast.error(error.message);
+    if (error) {
+      console.error(error);
+      toast.error('Network error. Please try again.');
+    }
 
     if (response) {
       formik.resetForm();

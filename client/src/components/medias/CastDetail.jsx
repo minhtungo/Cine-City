@@ -21,7 +21,10 @@ const CastDetail = () => {
       dispatch(setGlobalLoading(true));
       const { response, error } = await castApi.detail({ castId });
       dispatch(setGlobalLoading(false));
-      if (error) toast.error('Network error. Please try again.');
+      if (error) {
+        console.error(error);
+        toast.error('Network error. Please try again.');
+      }
       // if (error) toast.error(error.message);
       if (response) setCast(response);
     };

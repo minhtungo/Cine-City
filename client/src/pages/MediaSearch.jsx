@@ -29,7 +29,10 @@ const MediaSearch = () => {
 
     setIsLoading(false);
 
-    if (error) toast.error(error.message);
+    if (error) {
+      console.error(error);
+      toast.error('Network error. Please try again.');
+    }
     if (response) {
       if (page > 1) {
         setMedias((currentMedias) => [...currentMedias, ...response.results]);
