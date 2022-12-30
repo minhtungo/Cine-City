@@ -32,7 +32,7 @@ const Review = ({ review, onRemove }) => {
       removeId: review.id,
     });
 
-    if (error) toast.error(error.message);
+    if (error) toast.error('Network error. Please try again.');
     if (response) onRemove(review.id);
   };
 
@@ -125,7 +125,7 @@ const MediaReview = ({ reviews, media, mediaType }) => {
     const { response, error } = await reviewApi.addReview(body);
 
     setIsLoading(false);
-    if (error) toast.error(error.message);
+    if (error) toast.error('Network error. Please try again.');
     if (response) {
       toast.success('Add review successfully');
       setContent('');

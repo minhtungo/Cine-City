@@ -44,7 +44,7 @@ const MediaList = () => {
       setIsLoading(false);
       dispatch(setGlobalLoading(false));
 
-      if (error) toast.error(error.message);
+      if (error) toast.error('Network error. Please try again.');
       if (response) {
         if (currPage !== 1) {
           setMedias((currentMedias) => [...currentMedias, ...response.results]);

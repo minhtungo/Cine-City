@@ -71,7 +71,7 @@ const MediaDetail = () => {
         setIsFavorite(response.isFavorite);
       }
 
-      if (error) toast.error(error.message);
+      if (error) toast.error('Network error. Please try again.');
     };
 
     getMedia();
@@ -122,7 +122,7 @@ const MediaDetail = () => {
     });
     setIsLoading(false);
 
-    if (error) toast.error(error.message);
+    if (error) toast.error('Network error. Please try again.');
 
     if (response) {
       dispatch(removeFavorite(favorite));

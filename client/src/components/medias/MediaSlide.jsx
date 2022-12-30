@@ -17,7 +17,7 @@ const MediaSlide = ({ mediaType, mediaCategory }) => {
       });
 
       if (response) setMedias(response.results);
-      if (error) toast.error(error.message);
+      if (error) toast.error('Network error. Please try again.');
     };
 
     getMedias();

@@ -25,7 +25,7 @@ const FavoriteItem = ({ media, onRemoveItem }) => {
     });
     setIsLoading(false);
 
-    if (error) toast.error(error.message);
+    if (error) toast.error('Network error. Please try again.');
     if (response) {
       toast.success('Removed from favorite list');
       dispatch(removeFavorite({ mediaId: media.mediaId }));

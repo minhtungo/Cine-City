@@ -26,7 +26,7 @@ const ReviewItem = ({ review, onRemoveItem }) => {
     });
     setIsLoading(false);
 
-    if (error) toast.error(error.message);
+    if (error) toast.error('Network error. Please try again.');
     if (response) {
       toast.success('Review removed');
       onRemoveItem(review.id);
@@ -124,7 +124,7 @@ const ReviewList = () => {
       const { response, error } = await reviewApi.getReviewList();
       dispatch(setGlobalLoading(false));
 
-      if (error) toast.error(error.message);
+      if (error) toast.error('Network error. Please try again.');
       if (response) {
         setCount(response.length);
         setReviews([...response]);

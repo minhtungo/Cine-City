@@ -46,7 +46,7 @@ const ChangeAvatar = ({ isChangeAvatar, setIsChangeAvatar }) => {
         setAvatar(null);
       }
     } catch (error) {
-      toast.error('Error uploading avatar. Please try again later.');
+      toast.error(error);
     }
   };
 
@@ -70,7 +70,6 @@ const ChangeAvatar = ({ isChangeAvatar, setIsChangeAvatar }) => {
             type='file'
             onChange={(e) => {
               setAvatar(e.target.files[0]);
-              console.log(avatar);
             }}
             sx={{
               textAlign: 'center',
