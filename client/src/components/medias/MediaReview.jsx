@@ -15,6 +15,7 @@ import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
 import reviewApi from './../../api/modules/reviewApi';
 import UserAvatar from '../common/UserAvatar';
+import ReviewAvatar from '../common/ReviewAvatar';
 import Container from './../common/Container';
 
 const SKIP = 4;
@@ -52,13 +53,17 @@ const Review = ({ review, onRemove }) => {
     >
       <Stack direction='row' spacing={2}>
         {/* Avatar */}
-        <UserAvatar
+        <ReviewAvatar
           text={
             review.user?.displayName ||
             review.author_details?.username ||
             review.author
           }
-          tmdbUser={review.author ? review : false}
+          avatarUrl={
+            review.author
+              ? review.author_details.avatar_path
+              : review.user?.avatar
+          }
         />
         <Stack spacing={2} flexGrow={1}>
           <Stack
@@ -117,6 +122,12 @@ const MediaReview = ({ reviews, media, mediaType }) => {
   const [displayCount, setDisplayCount] = useState(SKIP);
   const [totalReviews, setTotalReviews] = useState(0);
 
+  let hasUserReview;
+
+  if (user) {
+    hasUserReview = reviewList.some((review) => review.user?.id === user?.id);
+  }
+
   useEffect(() => {
     const getTMDBReviewList = async () => {
       const { response, error } = await reviewApi.getTMDBReviewList({
@@ -142,7 +153,6 @@ const MediaReview = ({ reviews, media, mediaType }) => {
           new Date(a.createdAt || a.created_at)
       )
     );
-    console.log(reviewList.length);
     setTotalReviews(reviewList.length);
   }, [reviews, tmdbReviewList]);
 
@@ -197,7 +207,7 @@ const MediaReview = ({ reviews, media, mediaType }) => {
   return (
     <>
       <Container header={`Reviews (${totalReviews})`}>
-        {user && (
+        {user && !hasUserReview ? (
           <>
             <Stack direction='row' spacing={2}>
               <UserAvatar text={user.displayName} />
@@ -228,6 +238,17 @@ const MediaReview = ({ reviews, media, mediaType }) => {
             </Stack>
             <Divider />
           </>
+        ) : (
+          <Typography
+            variant='body1'
+            sx={{
+              color: 'text.secondary',
+            }}
+          >
+            {!user
+              ? 'Sign in to write a review'
+              : `You have already written a review for this ${mediaType}`}
+          </Typography>
         )}
         <Stack spacing={4}>
           {reviewList.slice(0, displayCount).map((item) => (

@@ -42,7 +42,14 @@ const MediaItem = ({ media, mediaType }) => {
     <Link
       to={
         mediaType !== 'people'
-          ? routeEndpoints.mediaDetail(mediaType, media.id || media.mediaId)
+          ? routeEndpoints.mediaDetail(
+              mediaType !== 'all'
+                ? mediaType
+                : media.release_date
+                ? 'movie'
+                : 'tv',
+              media.id || media.mediaId
+            )
           : routeEndpoints.cast(media.id)
       }
     >
