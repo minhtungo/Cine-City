@@ -7,6 +7,7 @@ import FavoriteList from '../pages/FavoriteList';
 import ReviewList from '../pages/ReviewList';
 import MediaDetail from '../pages/MediaDetail';
 import CastDetail from '../components/medias/CastDetail';
+import MediaPlayer from '../pages/MediaPlayer';
 
 export const routeEndpoints = {
   home: '/',
@@ -17,6 +18,8 @@ export const routeEndpoints = {
   favoriteList: '/favorites',
   reviewList: '/reviews',
   changePassword: '/change-password',
+  watch: (mediaId, mediaType, mediaKey) =>
+    `/watch/${mediaType}/${mediaId}/${mediaKey}`,
 };
 
 const routes = [
@@ -69,6 +72,10 @@ const routes = [
   {
     path: '/:mediaType/:mediaId',
     element: <MediaDetail />,
+  },
+  {
+    path: '/watch/:mediaType/:mediaId/:mediaKey',
+    element: <MediaPlayer />,
   },
 ];
 

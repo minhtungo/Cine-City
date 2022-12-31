@@ -15,6 +15,7 @@ import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { useSelector } from 'react-redux';
 import reviewApi from './../../api/modules/reviewApi';
 import UserAvatar from '../common/UserAvatar';
@@ -22,6 +23,8 @@ import ReviewAvatar from '../common/ReviewAvatar';
 import Container from './../common/Container';
 
 const SKIP = 4;
+
+dayjs.extend(relativeTime);
 
 const Review = ({ review, onRemove }) => {
   const { user } = useSelector((state) => state.user);
@@ -50,9 +53,6 @@ const Review = ({ review, onRemove }) => {
         padding: 2,
         borderRadius: '5px',
         position: 'relative',
-        '&:hover': {
-          backgroundColor: 'background.paper',
-        },
       }}
     >
       <Stack direction='row' spacing={2}>
@@ -83,9 +83,10 @@ const Review = ({ review, onRemove }) => {
                 review.author}
             </Typography>
             <Typography variant='caption'>
-              {dayjs(review.createdAt || review.created_at).format(
+              {/* {dayjs(review.createdAt || review.created_at).format(
                 'MMM DD, YYYY HH:mm'
-              )}
+              )} */}
+              {dayjs(review.createdAt || review.created_at).fromNow()}
             </Typography>
           </Stack>
           {/* content */}

@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { setGlobalLoading } from '../redux/features/globalLoadingSlice';
@@ -37,6 +37,7 @@ import MediaSlide from '../components/medias/MediaSlide';
 import MediaReview from '../components/medias/MediaReview';
 
 import dayjs from 'dayjs';
+import { routeEndpoints } from '../routes/routes';
 
 const MediaDetail = () => {
   const { mediaType, mediaId } = useParams();
@@ -291,7 +292,13 @@ const MediaDetail = () => {
                     }}
                     size='medium'
                     startIcon={<PlayArrowIcon />}
-                    onClick={() => videoRef.current.scrollIntoView()}
+                    component={Link}
+                    to={routeEndpoints.watch(
+                      media.id,
+                      mediaType,
+                      media.videos.results[0].key
+                    )}
+                    // onClick={() => videoRef.current.scrollIntoView()}
                   >
                     Watch Now
                   </Button>

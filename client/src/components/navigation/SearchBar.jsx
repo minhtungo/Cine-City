@@ -1,12 +1,35 @@
-import { IconButton, Toolbar, InputBase, Box, Collapse } from '@mui/material';
+import {
+  IconButton,
+  Toolbar,
+  InputBase,
+  Box,
+  useTheme,
+} from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import { TransitionGroup } from 'react-transition-group';
+import { styled, alpha } from '@mui/material/styles';
 
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    // vertical padding + font size from searchIcon
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
+  },
+}));
+
 const SearchBar = ({ isNonSmallScreens }) => {
+  const customTheme = useTheme();
+
   const [query, setQuery] = useState('');
   const [showSearchBar, setShowSearchBar] = useState(false);
 
@@ -38,43 +61,34 @@ const SearchBar = ({ isNonSmallScreens }) => {
 
   return (
     <>
-      <Toolbar
-        sx={{
-          paddingX: '0 !important',
-        }}
-      >
-        <TransitionGroup>
-          {showSearchBar && (
-            <Collapse orientation='horizontal' unmountOnExit>
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  borderRadius: '9px',
-                  gap: '0.5rem',
-                  backgroundColor: 'background.input',
-                  paddingRight: '1.5rem!important',
-                }}
-              >
-                <IconButton>
-                  <SearchOutlinedIcon />
-                </IconButton>
-                <InputBase
-                  placeholder='Titles, people'
-                  onChange={onQueryChange}
-                  autoFocus
-                  onBlur={onSearchBlur}
-                />
-              </Box>
-            </Collapse>
-          )}
-        </TransitionGroup>
-        {!showSearchBar && (
-          <IconButton onClick={onSearchIconClick}>
+      {showSearchBar && (
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            borderRadius: '9px',
+            gap: '0.5rem',
+            backgroundColor: 'background.input',
+            paddingRight: '1.5rem!important',
+          }}
+        >
+          <IconButton>
             <SearchOutlinedIcon />
           </IconButton>
-        )}
-      </Toolbar>
+          <StyledInputBase
+            placeholder='Titles, people'
+            onChange={onQueryChange}
+            autoFocus
+            onBlur={onSearchBlur}
+          />
+        </Box>
+      )}
+
+      {!showSearchBar && (
+        <IconButton onClick={onSearchIconClick}>
+          <SearchOutlinedIcon />
+        </IconButton>
+      )}
     </>
   );
 };
