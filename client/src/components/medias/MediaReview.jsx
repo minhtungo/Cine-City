@@ -11,7 +11,7 @@ import {
   Input,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
-import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
+import SendIcon from '@mui/icons-material/Send';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
@@ -27,6 +27,7 @@ const Review = ({ review, onRemove }) => {
   const { user } = useSelector((state) => state.user);
 
   const [isLoading, setIsLoading] = useState(false);
+  const isNonSmallScreens = useMediaQuery('(min-width: 500px)');
 
   const onRemoveReview = async () => {
     if (isLoading) return;
@@ -88,27 +89,50 @@ const Review = ({ review, onRemove }) => {
             </Typography>
           </Stack>
           {/* content */}
-          <Typography variant='body1' textAlign='justify'>
+          <Typography variant='body1' textAlign='left'>
             {review.content}
           </Typography>
-          {!review.author && user && user?.id === review.user?.id && (
-            <LoadingButton
-              variant='outlined'
-              size='medium'
-              startIcon={<DeleteIcon />}
-              loadingPosition='start'
-              loading={isLoading}
-              onClick={onRemoveReview}
-              sx={{
-                position: { xs: 'relative', md: 'absolute' },
-                right: { xs: 0, md: '10px' },
-                marginTop: { xs: 2, md: 0 },
-                width: 'max-content',
-              }}
-            >
-              Remove
-            </LoadingButton>
-          )}
+          {!review.author &&
+            user &&
+            user?.id === review.user?.id &&
+            (isNonSmallScreens ? (
+              <LoadingButton
+                variant='outlined'
+                size='medium'
+                startIcon={<DeleteIcon />}
+                loadingPosition='start'
+                loading={isLoading}
+                onClick={onRemoveReview}
+                sx={{
+                  position: { xs: 'relative', md: 'absolute' },
+                  right: { xs: 0, md: '10px' },
+                  marginTop: { xs: 2, md: 0 },
+                  width: 'max-content',
+                }}
+              >
+                Remove
+              </LoadingButton>
+            ) : (
+              <IconButton
+                aria-label='delete'
+                sx={{
+                  marginTop: '10px !important',
+                  padding: '5px',
+                  position: 'absolute',
+                  top: '0px',
+                  right: '0px',
+                }}
+                onClick={onRemoveReview}
+              >
+                <DeleteIcon
+                  sx={{
+                    color: 'primary.main',
+                    height: '20px',
+                    width: '20px',
+                  }}
+                />
+              </IconButton>
+            ))}
         </Stack>
       </Stack>
     </Box>
@@ -228,7 +252,14 @@ const MediaReview = ({ reviews, media, mediaType }) => {
                     <InputAdornment position='end'>
                       {content && !isNonSmallScreens ? (
                         <IconButton aria-label='send' onClick={onAddReview}>
-                          <SendOutlinedIcon />
+                          <SendIcon
+                            sx={{
+                              marginBottom: '3px',
+                              width: '20px',
+                              height: '20px',
+                              color: 'primary.main',
+                            }}
+                          />
                         </IconButton>
                       ) : null}
                     </InputAdornment>
@@ -242,7 +273,7 @@ const MediaReview = ({ reviews, media, mediaType }) => {
                       width: 'max-content',
                       alignSelf: 'flex-end',
                     }}
-                    startIcon={<SendOutlinedIcon />}
+                    startIcon={<SendIcon />}
                     loadingPosition='start'
                     loading={isLoading}
                     onClick={onAddReview}
@@ -258,7 +289,7 @@ const MediaReview = ({ reviews, media, mediaType }) => {
             variant='body1'
             sx={{
               color: 'text.secondary',
-              paddingLeft: { xs: '18px',  md: '0' },
+              paddingLeft: { xs: '18px', md: '0' },
             }}
           >
             {!user
