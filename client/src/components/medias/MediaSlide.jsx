@@ -22,8 +22,26 @@ const MediaSlide = ({ mediaType, mediaCategory }) => {
         toast.error('Network error. Please try again.');
       }
     };
+    const getTrending = async () => {
+      const { response, error } = await mediaApi.getTrending({
+        mediaCategory,
+        mediaType,
+        timeWindow: 'week',
+      });
 
-    getMedias();
+      if (response) setMedias(response.results);
+      if (error) {
+        console.error(error);
+        toast.error('Network error. Please try again.');
+      }
+    };
+
+    if (mediaCategory === 'trending') {
+      getTrending();
+      return;
+    } else {
+      getMedias();
+    }
   }, [mediaType, mediaCategory]);
 
   return (

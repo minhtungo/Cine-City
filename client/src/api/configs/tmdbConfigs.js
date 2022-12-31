@@ -1,14 +1,16 @@
 const mediaType = {
   movie: 'movie',
   tv: 'tv',
+  all: 'all',
 };
 
 const mediaCategory = {
   popular: 'popular',
   top_rated: 'top_rated',
+  trending: 'trending',
 };
 
-export const mediaCategories = ['popular', 'top_rated'];
+export const mediaCategories = ['popular', 'top_rated', 'trending'];
 
 const backdropPath = (imgEndpoint) =>
   `https://image.tmdb.org/t/p/original${imgEndpoint}`;

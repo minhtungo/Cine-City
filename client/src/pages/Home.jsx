@@ -18,6 +18,12 @@ const Home = () => {
           ...uiConfigs.style.mainContent,
         }}
       >
+        <Container header={'trending now'}>
+          <MediaSlide
+            mediaCategory={tmdbConfigs.mediaCategory.trending}
+            mediaType={tmdbConfigs.mediaType.all}
+          />
+        </Container>
         <Container header={'popular movies'}>
           <MediaSlide
             mediaType={tmdbConfigs.mediaType.movie}

@@ -17,7 +17,7 @@ import reviewApi from './../../api/modules/reviewApi';
 import UserAvatar from '../common/UserAvatar';
 import Container from './../common/Container';
 
-const SKIP = 5;
+const SKIP = 4;
 
 const Review = ({ review, onRemove }) => {
   const { user } = useSelector((state) => state.user);
@@ -29,7 +29,7 @@ const Review = ({ review, onRemove }) => {
     setIsLoading(true);
 
     const { response, error } = await reviewApi.removeReview({
-      removeId: review.id,
+      reviewId: review.id,
     });
 
     if (error) {
@@ -52,7 +52,14 @@ const Review = ({ review, onRemove }) => {
     >
       <Stack direction='row' spacing={2}>
         {/* Avatar */}
-        <UserAvatar text={review.user.displayName} />
+        <UserAvatar
+          text={
+            review.user?.displayName ||
+            review.author_details?.username ||
+            review.author
+          }
+          tmdbUser={review.author ? review : false}
+        />
         <Stack spacing={2} flexGrow={1}>
           <Stack
             spacing={1}
@@ -62,17 +69,21 @@ const Review = ({ review, onRemove }) => {
             }}
           >
             <Typography variant='body1' fontWeight='700'>
-              {review.user.displayName}
+              {review.user?.displayName ||
+                review.author_details?.name ||
+                review.author}
             </Typography>
             <Typography variant='caption'>
-              {dayjs(review.createdAt).format('MMM DD, YYYY HH:mm')}
+              {dayjs(review.createdAt || review.created_at).format(
+                'MMM DD, YYYY HH:mm'
+              )}
             </Typography>
           </Stack>
           {/* content */}
           <Typography variant='body1' textAlign='justify'>
             {review.content}
           </Typography>
-          {user && user.id === review.user.id && (
+          {!review.author && user && user?.id === review.user?.id && (
             <LoadingButton
               variant='outlined'
               size='medium'
@@ -98,19 +109,46 @@ const Review = ({ review, onRemove }) => {
 
 const MediaReview = ({ reviews, media, mediaType }) => {
   const { user } = useSelector((state) => state.user);
-
   const [reviewList, setReviewList] = useState([]);
-  const [filteredReviews, setFilteredReviews] = useState([]);
+  const [tmdbReviewList, setTMDBReviewList] = useState([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [content, setContent] = useState('');
-  const [reviewCount, setReviewCount] = useState(0);
+  const [displayCount, setDisplayCount] = useState(SKIP);
+  const [totalReviews, setTotalReviews] = useState(0);
 
   useEffect(() => {
-    setReviewList([...reviews]);
-    setFilteredReviews([...reviews].slice(0, SKIP));
-    setReviewCount(reviews.length);
-  }, [reviews]);
+    const getTMDBReviewList = async () => {
+      const { response, error } = await reviewApi.getTMDBReviewList({
+        mediaId: media.id,
+        mediaType,
+      });
+
+      if (error) {
+        console.error(error);
+      }
+      if (response) {
+        setTMDBReviewList(response.results);
+      }
+    };
+    getTMDBReviewList();
+  }, []);
+
+  useEffect(() => {
+    setReviewList(
+      [...tmdbReviewList, ...reviews].sort(
+        (a, b) =>
+          new Date(b.createdAt || b.created_at) -
+          new Date(a.createdAt || a.created_at)
+      )
+    );
+    console.log(reviewList.length);
+    setTotalReviews(reviewList.length);
+  }, [reviews, tmdbReviewList]);
+
+  useEffect(() => {
+    setTotalReviews(reviewList.length);
+  }, [reviewList]);
 
   const onAddReview = async () => {
     if (isLoading) return;
@@ -134,41 +172,31 @@ const MediaReview = ({ reviews, media, mediaType }) => {
     }
     if (response) {
       toast.success('Add review successfully');
+      setReviewList([response, ...reviewList]);
+      setTotalReviews(totalReviews + 1);
       setContent('');
-      //   setReviewList([response, ...reviewList]);
-      setFilteredReviews([response, ...reviewList].slice(0, SKIP));
-      setReviewCount(reviewCount + 1);
     }
   };
 
   const onLoadMore = () => {
-    setFilteredReviews([
-      ...filteredReviews,
-      ...[...reviewList].splice(SKIP * page, SKIP),
-    ]);
+    setDisplayCount((prevCount) => prevCount + 10);
     setPage(page + 1);
   };
-
   const onRemove = (id) => {
     if (reviewList.findIndex((review) => review.id === id) !== -1) {
       const newReviewList = [...reviewList].filter(
         (review) => review.id !== id
       );
       setReviewList(newReviewList);
-      setFilteredReviews([...newReviewList].splice(0, page * SKIP));
-    } else {
-      setFilteredReviews(
-        [...filteredReviews].filter((review) => review.id !== id)
-      );
     }
 
-    setReviewCount(reviewCount - 1);
+    setTotalReviews(totalReviews - 1);
     toast.success('Remove review successfully');
   };
 
   return (
     <>
-      <Container header={`Reviews (${reviewCount})`}>
+      <Container header={`Reviews (${totalReviews})`}>
         {user && (
           <>
             <Stack direction='row' spacing={2}>
@@ -202,7 +230,7 @@ const MediaReview = ({ reviews, media, mediaType }) => {
           </>
         )}
         <Stack spacing={4}>
-          {filteredReviews.map((item) => (
+          {reviewList.slice(0, displayCount).map((item) => (
             <Box key={item.id}>
               <Review review={item} onRemove={onRemove} />
               <Divider
@@ -212,7 +240,7 @@ const MediaReview = ({ reviews, media, mediaType }) => {
               />
             </Box>
           ))}
-          {filteredReviews.length < reviewList.length && (
+          {displayCount < reviewList.length && (
             <Button onClick={onLoadMore}>Load More</Button>
           )}
         </Stack>

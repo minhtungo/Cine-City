@@ -317,7 +317,7 @@ const MediaDetail = () => {
             <Backdrops backdrops={media.images.backdrops} />
           </Container>
         )}
-
+        {/* review */}
         <MediaReview
           reviews={media.reviews}
           media={media}

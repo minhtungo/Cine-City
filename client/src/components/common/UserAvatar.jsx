@@ -1,7 +1,8 @@
 import { Avatar } from '@mui/material';
 import { useSelector } from 'react-redux';
+import tmdbConfigs from '../../api/configs/tmdbConfigs';
 
-const UserAvatar = ({ text }) => {
+const UserAvatar = ({ text, tmdbUser = false }) => {
   const { user } = useSelector((state) => state.user);
 
   const stringToColor = (str) => {
@@ -22,11 +23,29 @@ const UserAvatar = ({ text }) => {
     return color;
   };
 
+  let avatar;
+
+  if (!tmdbUser) {
+    if (user.id !== tmdbUser?.id && user?.avatar) {
+      avatar = user.avatar;
+    } else {
+      avatar = null;
+    }
+  } else {
+    let avatarUrl = tmdbUser?.author_details.avatar_path;
+    if (avatarUrl?.includes('gravatar.com')) {
+      avatar = avatarUrl.substring(1);
+    } else {
+      avatar = tmdbConfigs.posterPath(avatarUrl);
+    }
+  }
+
   return (
     <Avatar
-      src={user.avatar !== '' ? user.avatar : null}
+      src={avatar}
       sx={{
-        backgroundColor: user.avatar === '' && stringToColor,
+        backgroundColor:
+          !tmdbUser && user?.avatar === '' && stringToColor(text),
         width: 35,
         height: 35,
         marginLeft: '10px',

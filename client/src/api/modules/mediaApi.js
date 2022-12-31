@@ -4,6 +4,8 @@ import userClient from '../client/userClient';
 const mediaEndpoints = {
   list: ({ mediaType, mediaCategory, page }) =>
     `${mediaType}/${mediaCategory}?page=${page}`,
+  trendingList: ({ mediaType, mediaCategory, timeWindow }) =>
+    `${mediaType}/${mediaCategory}/${timeWindow}`,
   detail: ({ mediaType, mediaId }) => `${mediaType}/detail/${mediaId}`,
   search: ({ mediaType, query, page }) =>
     `${mediaType}/search?query=${query}&page=${page}`,
@@ -18,6 +20,16 @@ const mediaApi = {
         mediaEndpoints.list({ mediaType, mediaCategory, page })
       );
 
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+  getTrending: async ({ mediaCategory, mediaType, timeWindow }) => {
+    try {
+      const response = await guestClient.get(
+        mediaEndpoints.trendingList({ mediaType, mediaCategory, timeWindow })
+      );
       return { response };
     } catch (error) {
       return { error };

@@ -6,15 +6,45 @@ import favoriteModel from './../models/Favorite.js';
 import reviewModel from '../models/Review.js';
 
 const getMediaList = async (req, res) => {
+  if (req.params.mediaCategory === 'trending') {
+    try {
+      const { mediaType, mediaCategory, timeWindow = 'week' } = req.params;
+      const response = await tmdbApi.trendingList({
+        mediaType,
+        mediaCategory,
+        timeWindow,
+      });
+
+      return responseHandler.successResponse(res, response);
+    } catch {
+      responseHandler.errorResponse(res);
+    }
+  } else {
+    try {
+      const { page } = req.query;
+
+      const { mediaType, mediaCategory } = req.params;
+
+      const response = await tmdbApi.mediaList({
+        mediaType,
+        mediaCategory,
+        page,
+      });
+
+      return responseHandler.successResponse(res, response);
+    } catch {
+      responseHandler.errorResponse(res);
+    }
+  }
+};
+
+const getTMDBReviewList = async (req, res) => {
   try {
-    const { page } = req.query;
+    const { mediaId, mediaType } = req.params;
 
-    const { mediaType, mediaCategory } = req.params;
-
-    const response = await tmdbApi.mediaList({
+    const response = await tmdbApi.tmdbReviewList({
+      mediaId,
       mediaType,
-      mediaCategory,
-      page,
     });
 
     return responseHandler.successResponse(res, response);
@@ -113,4 +143,5 @@ export default {
   searchMedia,
   getMediaDetail,
   searchMultiMedia,
+  getTMDBReviewList,
 };

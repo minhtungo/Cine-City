@@ -4,6 +4,7 @@ const reviewEndpoints = {
   list: 'reviews',
   add: 'reviews',
   remove: ({ reviewId }) => `reviews/${reviewId}`,
+  tmdbReviewList: ({ mediaId, mediaType }) => `${mediaType}/${mediaId}/reviews`,
 };
 
 const reviewApi = {
@@ -43,6 +44,19 @@ const reviewApi = {
     try {
       const response = await userClient.get(reviewEndpoints.list);
 
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+  getTMDBReviewList: async ({ mediaId, mediaType }) => {
+    try {
+      const response = await userClient.get(
+        reviewEndpoints.tmdbReviewList({
+          mediaId,
+          mediaType,
+        })
+      );
       return { response };
     } catch (error) {
       return { error };

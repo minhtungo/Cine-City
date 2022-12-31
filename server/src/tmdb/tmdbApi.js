@@ -6,6 +6,14 @@ const tmdbApi = {
     await axiosClient.fetchData(
       tmdbEndpoints.mediaList({ mediaType, mediaCategory, page })
     ),
+  tmdbReviewList: async ({ mediaId, mediaType }) =>
+    await axiosClient.fetchData(
+      tmdbEndpoints.tmdbReviewList({ mediaId, mediaType })
+    ),
+  trendingList: async ({ mediaType, mediaCategory, timeWindow }) =>
+    await axiosClient.fetchData(
+      tmdbEndpoints.trendingList({ mediaType, mediaCategory, timeWindow })
+    ),
   mediaDetail: async ({ mediaType, mediaId }) =>
     await axiosClient.fetchData(
       tmdbEndpoints.mediaDetails({ mediaType, mediaId })

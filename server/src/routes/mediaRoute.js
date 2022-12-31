@@ -9,6 +9,10 @@ router.get('/genres', mediaControllers.getMediaGenres);
 
 router.get('/detail/:mediaId', mediaControllers.getMediaDetail);
 
+router.get('/:mediaId/reviews', mediaControllers.getTMDBReviewList);
+
 router.get('/:mediaCategory', mediaControllers.getMediaList);
+
+router.get('/:mediaCategory/*', mediaControllers.getMediaList);
 
 export default router;
