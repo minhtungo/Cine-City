@@ -4,8 +4,11 @@ import {
   Button,
   Divider,
   Stack,
-  TextField,
+  useMediaQuery,
   Typography,
+  InputAdornment,
+  IconButton,
+  Input,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
@@ -122,6 +125,8 @@ const MediaReview = ({ reviews, media, mediaType }) => {
   const [displayCount, setDisplayCount] = useState(SKIP);
   const [totalReviews, setTotalReviews] = useState(0);
 
+  const isNonSmallScreens = useMediaQuery('(min-width: 500px)');
+
   let hasUserReview;
 
   if (user) {
@@ -212,37 +217,48 @@ const MediaReview = ({ reviews, media, mediaType }) => {
             <Stack direction='row' spacing={2}>
               <UserAvatar text={user.displayName} />
               <Stack spacing={2} flexGrow={1}>
-                <TextField
+                <Input
                   value={content}
                   multiline
                   maxRows={10}
                   placeholder='Write a review...'
-                  variant='outlined'
+                  variant='standard'
                   onChange={(e) => setContent(e.target.value)}
+                  endAdornment={
+                    <InputAdornment position='end'>
+                      {content && !isNonSmallScreens ? (
+                        <IconButton aria-label='send' onClick={onAddReview}>
+                          <SendOutlinedIcon />
+                        </IconButton>
+                      ) : null}
+                    </InputAdornment>
+                  }
                 />
-                <LoadingButton
-                  variant='contained'
-                  size='medium'
-                  sx={{
-                    width: 'max-content',
-                    alignSelf: 'flex-end',
-                  }}
-                  startIcon={<SendOutlinedIcon />}
-                  loadingPosition='start'
-                  loading={isLoading}
-                  onClick={onAddReview}
-                >
-                  Post
-                </LoadingButton>
+                {isNonSmallScreens && (
+                  <LoadingButton
+                    variant='contained'
+                    size='small'
+                    sx={{
+                      width: 'max-content',
+                      alignSelf: 'flex-end',
+                    }}
+                    startIcon={<SendOutlinedIcon />}
+                    loadingPosition='start'
+                    loading={isLoading}
+                    onClick={onAddReview}
+                  >
+                    Post
+                  </LoadingButton>
+                )}
               </Stack>
             </Stack>
-            <Divider />
           </>
         ) : (
           <Typography
             variant='body1'
             sx={{
               color: 'text.secondary',
+              paddingLeft: { xs: '18px',  md: '0' },
             }}
           >
             {!user
